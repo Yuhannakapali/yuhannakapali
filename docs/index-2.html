@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+  <!-- Mirrored from preview.colorlib.com/theme/calvin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 02 Oct 2022 19:20:50 GMT -->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Personal | Template</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="manifest" href="site.html" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/img/favicon.ico"
+    />
+
+    <link rel="stylesheet" href="assets/css/minified.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script nonce="369a348f-916b-4a5e-adcc-2fd02d6e2b0d">
+      (function (w, d) {
+        !(function (a, e, t, r) {
+          a.zarazData = a.zarazData || {};
+          a.zarazData.executed = [];
+          a.zaraz = { deferred: [], listeners: [] };
+          a.zaraz.q = [];
+          a.zaraz._f = function (e) {
+            return function () {
+              var t = Array.prototype.slice.call(arguments);
+              a.zaraz.q.push({ m: e, a: t });
+            };
+          };
+          for (const e of ["track", "set", "debug"]) a.zaraz[e] = a.zaraz._f(e);
+          a.zaraz.init = () => {
+            var t = e.getElementsByTagName(r)[0],
+              z = e.createElement(r),
+              n = e.getElementsByTagName("title")[0];
+            n && (a.zarazData.t = e.getElementsByTagName("title")[0].text);
+            a.zarazData.x = Math.random();
+            a.zarazData.w = a.screen.width;
+            a.zarazData.h = a.screen.height;
+            a.zarazData.j = a.innerHeight;
+            a.zarazData.e = a.innerWidth;
+            a.zarazData.l = a.location.href;
+            a.zarazData.r = e.referrer;
+            a.zarazData.k = a.screen.colorDepth;
+            a.zarazData.n = e.characterSet;
+            a.zarazData.o = new Date().getTimezoneOffset();
+            a.zarazData.q = [];
+            for (; a.zaraz.q.length; ) {
+              const e = a.zaraz.q.shift();
+              a.zarazData.q.push(e);
+            }
+            z.defer = !0;
+            for (const e of [localStorage, sessionStorage])
+              Object.keys(e || {})
+                .filter((a) => a.startsWith("_zaraz_"))
+                .forEach((t) => {
+                  try {
+                    a.zarazData["z_" + t.slice(7)] = JSON.parse(e.getItem(t));
+                  } catch {
+                    a.zarazData["z_" + t.slice(7)] = e.getItem(t);
+                  }
+                });
+            z.referrerPolicy = "origin";
+            z.src =
+              "../../cdn-cgi/zaraz/sd0d9.js?z=" +
+              btoa(encodeURIComponent(JSON.stringify(a.zarazData)));
+            t.parentNode.insertBefore(z, t);
+          };
+          ["complete", "interactive"].includes(e.readyState)
+            ? zaraz.init()
+            : a.addEventListener("DOMContentLoaded", zaraz.init);
+        })(w, d, 0, "script");
+      })(window, document);
+    </script>
+  </head>
+  <body>
+    <div id="preloader-active">
+      <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+          <div class="preloader-circle"></div>
+          <div class="preloader-img pere-text">
+            <img src="assets/img/logo/loder.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header>
+      <div class="header-area header-transparent">
+        <div class="main-header header-sticky">
+          <div class="container-fluid">
+            <div
+              class="menu-wrapper d-flex align-items-center justify-content-between"
+            >
+              <div class="logo">
+                <a href="index-2.html"
+                  ><img src="assets/img/logo/logo.png" alt=""
+                /></a>
+              </div>
+
+              <div class="main-menu f-right d-none d-lg-block">
+                <nav>
+                  <ul id="navigation">
+                    <li><a href="index-2.html">Home</a></li>
+                    <li><a href="work.html">work</a></li>
+                    <li><a href="service.html">service</a></li>
+                    <li>
+                      <a href="blog.html">Blog</a>
+                      <ul class="submenu">
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="blog_details.html">Blog Details</a></li>
+                        <li><a href="elements.html">Elements</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="contact.html">Contact</a></li>
+                  </ul>
+                </nav>
+              </div>
+
+              <div class="header-info-right d-none d-lg-block">
+                <a href="#" class="border-btn">Let's Talk</a>
+              </div>
+
+              <div class="col-12">
+                <div class="mobile_menu d-block d-lg-none"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="slider-area position-relative">
+        <div class="single-slider slider-height d-flex align-items-center">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-xl-4 col-lg-5 col-md-5 col-sm-4">
+                <div class="employee">
+                  <img
+                    src="assets/img/hero/xempolye.png.pagespeed.ic.6ZjfgMCoTp.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
+                <div class="hero__caption">
+                  <h1>
+                    My name is Calvin.<br />
+                    Digital Product Designer
+                  </h1>
+                  <p>Head of design at Calvino</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-info">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-5 col-md-3 col-sm-3">
+                <div class="about-info-single">
+                  <p>Design For</p>
+                  <span>Web & Mobile</span>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-9 col-sm-9">
+                <div
+                  class="about-info-wrapper d-flex justify-content-between flex-wrap"
+                >
+                  <div class="about-info-single text-right">
+                    <p>Phone</p>
+                    <span>+10 (67) 367-9034</span>
+                  </div>
+                  <div
+                    class="about-info-single text-right d-flex align-items-center"
+                  >
+                    <div class="about-info-single mr-5">
+                      <p>Drop your Message</p>
+                      <span
+                        ><u
+                          ><a
+                            href="https://preview.colorlib.com/cdn-cgi/l/email-protection"
+                            class="__cf_email__"
+                            data-cfemail="ccafada0baa5a2a3f5fc8caba1ada5a0e2afa3a1"
+                            >[email&#160;protected]</a
+                          ></u
+                        ></span
+                      >
+                    </div>
+                    <div class="icon">
+                      <img
+                        src="assets/img/gallery/xemail-icon.png.pagespeed.ic.nonz9840f5.png"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="our-services section-padding40">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-8 col-lg-8">
+              <div class="section-tittle mb-80">
+                <h2>My Experties</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row no-gutters">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="single-services">
+                <div class="services-ion">
+                  <img src="assets/img/icon/services1.svg" alt="" />
+                </div>
+                <div class="services-cap">
+                  <h5><a href="#">Strategy & Direction</a></h5>
+                  <p>
+                    Understand First. Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.
+                  </p>
+                  <a href="#" class="browse-btn">Head of design at Calvino</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="single-services">
+                <div class="services-ion">
+                  <img src="assets/img/icon/services2.svg" alt="" />
+                </div>
+                <div class="services-cap">
+                  <h5><a href="#">Strategy & Direction</a></h5>
+                  <p>
+                    Understand First. Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.
+                  </p>
+                  <a href="#" class="browse-btn">Head of design at Calvino</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="single-services">
+                <div class="services-ion">
+                  <img src="assets/img/icon/services3.svg" alt="" />
+                </div>
+                <div class="services-cap">
+                  <h5><a href="#">Strategy & Direction</a></h5>
+                  <p>
+                    Understand First. Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.
+                  </p>
+                  <a href="#" class="browse-btn">Head of design at Calvino</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="single-services">
+                <div class="services-ion">
+                  <img src="assets/img/icon/services4.svg" alt="" />
+                </div>
+                <div class="services-cap">
+                  <h5><a href="#">Strategy & Direction</a></h5>
+                  <p>
+                    Understand First. Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.
+                  </p>
+                  <a href="#" class="browse-btn">Head of design at Calvino</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery-area gallery-area2 section-padding40">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="section-tittle mb-60">
+                <h2>My Works</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <div class="box snake mb-30">
+                <div
+                  class="gallery-img small-img"
+                  style="background-image: url(assets/img/gallery/gallery1.png)"
+                ></div>
+                <div class="overlay">
+                  <div class="overlay-content">
+                    <a href="#" class="img-pop-up">Strategy & Direction</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="box snake mb-30">
+                <div
+                  class="gallery-img small-img"
+                  style="background-image: url(assets/img/gallery/gallery2.png)"
+                ></div>
+                <div class="overlay">
+                  <div class="overlay-content">
+                    <a href="#" class="img-pop-up">Strategy & Direction</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="box snake mb-30">
+                <div
+                  class="gallery-img small-img"
+                  style="background-image: url(assets/img/gallery/gallery3.png)"
+                ></div>
+                <div class="overlay">
+                  <div class="overlay-content">
+                    <a href="#" class="img-pop-up">Strategy & Direction</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="box snake mb-30">
+                <div
+                  class="gallery-img small-img"
+                  style="background-image: url(assets/img/gallery/gallery4.png)"
+                ></div>
+                <div class="overlay">
+                  <div class="overlay-content">
+                    <a href="#" class="img-pop-up">Strategy & Direction</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="more-btn text-center mt-40">
+                <a href="#" class="border-btn2">More Work</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-area section-padding40">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-xl-6 col-lg-6 col-md-10">
+              <div class="about-caption mb-50">
+                <div class="section-tittle mb-35">
+                  <h2>About Me</h2>
+                </div>
+                <p>
+                  In the mean time shall soon find out the cause of this: What
+                  was the epicurus towards their children; each of these can
+                  have a chain of not to have been taken in the broad plain in
+                  what is the reason why
+                </p>
+                <p class="bottom-content">
+                  "What was the epicurus towards their children; each of these
+                  can have a chain.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="skill-ara">
+                <div class="skill">
+                  <div class="single-skill">
+                    <div class="progress-count">
+                      <p>User Interface Design</p>
+                      <span>60%</span>
+                    </div>
+                    <div class="progress">
+                      <div
+                        class="progress-bar wow slideInLeft"
+                        data-wow-duration="1s"
+                        data-wow-delay=".5s"
+                        aria-valuenow="25"
+                        role="progressbar"
+                        style="width: 60%"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="single-skill">
+                    <div class="progress-count">
+                      <p>User Experience</p>
+                      <span>89%</span>
+                    </div>
+                    <div class="progress">
+                      <div
+                        class="progress-bar wow slideInLeft"
+                        data-wow-duration="1s"
+                        data-wow-delay=".7s"
+                        role="progressbar"
+                        style="width: 89%"
+                        aria-valuenow="25"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                  <div class="single-skill">
+                    <div class="progress-count">
+                      <p>Illustration</p>
+                      <span>95%</span>
+                    </div>
+                    <div class="progress">
+                      <div
+                        class="progress-bar wow slideInLeft"
+                        data-wow-duration="1s"
+                        data-wow-delay=".6s"
+                        role="progressbar"
+                        style="width: 95%"
+                        aria-valuenow="25"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-area">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="brand-active brand-border">
+                  <div class="single-brand">
+                    <img
+                      src="assets/img/gallery/xbrand1.png.pagespeed.ic.d1mj7rnJaX.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="single-brand">
+                    <img
+                      src="assets/img/gallery/xbrand2.png.pagespeed.ic.9akj3VEvoF.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="single-brand">
+                    <img
+                      src="assets/img/gallery/xbrand3.png.pagespeed.ic.79awt4iv8P.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="single-brand">
+                    <img
+                      src="assets/img/gallery/xbrand4.png.pagespeed.ic.hszvHuixnh.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="single-brand">
+                    <img
+                      src="assets/img/gallery/xbrand5.png.pagespeed.ic.CAlpLIvrK9.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="single-brand">
+                    <img
+                      src="assets/img/gallery/xbrand6.png.pagespeed.ic.qKH8QAQrs_.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="single-brand">
+                    <img
+                      src="assets/img/gallery/xbrand3.png.pagespeed.ic.79awt4iv8P.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonial-area">
+        <div class="container">
+          <div class="testimonial-wrapper">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="section-tittle text-center mb-50">
+                  <h2>Client Testimonial</h2>
+                </div>
+              </div>
+            </div>
+            <div class="row align-items-center justify-content-center">
+              <div class="col-lg-10 col-md-12 col-sm-11">
+                <div class="h1-testimonial-active">
+                  <div class="single-testimonial text-center">
+                    <div class="testimonial-caption">
+                      <p>
+                        "Supercharge your WordPress hosting with detailed
+                        website analytics, marketing tools. Our experts are just
+                        part of the reason Bluehost is the ideal home for your
+                        WordPress website. We're here to help you succeed!
+                      </p>
+                    </div>
+
+                    <div
+                      class="testimonial-founder d-flex align-items-center justify-content-center"
+                    >
+                      <div class="founder-img">
+                        <img
+                          src="assets/img/icon/xtestimonial.png.pagespeed.ic.SAQkvOnZnV.png"
+                          alt=""
+                        />
+                      </div>
+                      <div class="founder-text">
+                        <span>Jacson Miller</span>
+                        <p>Designer @Colorlib</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="single-testimonial text-center">
+                    <div class="testimonial-caption">
+                      <p>
+                        "Supercharge your WordPress hosting with detailed
+                        website analytics, marketing tools. Our experts are just
+                        part of the reason Bluehost is the ideal home for your
+                        WordPress website. We're here to help you succeed!
+                      </p>
+                    </div>
+
+                    <div
+                      class="testimonial-founder d-flex align-items-center justify-content-center"
+                    >
+                      <div class="founder-img">
+                        <img
+                          src="assets/img/icon/xtestimonial.png.pagespeed.ic.SAQkvOnZnV.png"
+                          alt=""
+                        />
+                      </div>
+                      <div class="founder-text">
+                        <span>Jacson Miller</span>
+                        <p>Designer @Colorlib</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-blog section-padding40">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="section-tittle mb-50">
+                <h2>Latest News</h2>
+              </div>
+            </div>
+          </div>
+          <div class="blog-active">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="single-location mb-30">
+                <div class="location-img">
+                  <img
+                    src="assets/img/gallery/xhome-blog1.png.pagespeed.ic.-qOzA_Z4Gy.png"
+                    alt=""
+                  />
+                </div>
+                <div class="location-details">
+                  <a href="#" class="location-btn">Tips</a>
+                  <ul>
+                    <li>12 March I by Alan</li>
+                  </ul>
+                  <p>
+                    <a href="blog_details.html"
+                      >The Best SPA Salons For Your Relaxation</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="single-location mb-30">
+                <div class="location-img">
+                  <img src="assets/img/gallery/home-blog2.png" alt="" />
+                </div>
+                <div class="location-details">
+                  <a href="#" class="location-btn">Tips</a>
+                  <ul>
+                    <li>12 March I by Alan</li>
+                  </ul>
+                  <p>
+                    <a href="blog_details.html"
+                      >The Best SPA Salons For Your Relaxation</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="single-location mb-30">
+                <div class="location-img">
+                  <img src="assets/img/gallery/home-blog2.png" alt="" />
+                </div>
+                <div class="location-details">
+                  <a href="#" class="location-btn">Tips</a>
+                  <ul>
+                    <li>12 March I by Alan</li>
+                  </ul>
+                  <p>
+                    <a href="blog_details.html"
+                      >The Best SPA Salons For Your Relaxation</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-wrappr">
+        <div class="footer-top">
+          <section class="wantToWork-area">
+            <div class="container">
+              <div class="wants-wrapper w-padding2">
+                <div class="row align-items-center justify-content-between">
+                  <div class="col-xl-5 col-lg-6 col-md-10">
+                    <div class="wantToWork-caption">
+                      <img
+                        src="assets/img/logo/logo2_footer.png"
+                        alt=""
+                        class="mb-15"
+                      />
+                      <p>
+                        In the mean time shall soon find out the cause of this:
+                        What was the epicurus towards their children.
+                      </p>
+                      <div class="footer-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://bit.ly/sai4ull"
+                          ><i class="fab fa-facebook-f"></i
+                        ></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-5 col-lg-6 col-md-10">
+                    <div class="wantToWork-btn">
+                      <a href="#" class="btn f-right sm-left mr-5"
+                        >Let's Talk</a
+                      >
+                      <a
+                        href="#"
+                        class="border-btn white-btn f-right sm-left mr-5"
+                        >Download CV</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="footer-bottom-area">
+          <div class="container">
+            <div class="footer-border">
+              <div class="row align-items-center">
+                <div class="col-xl-6 col-lg-5">
+                  <div class="footer-copy-right">
+                    <p>
+                      Copyright &copy;
+                      <script
+                        data-cfasync="false"
+                        src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+                      ></script>
+                      <script>
+                        document.write(new Date().getFullYear());
+                      </script>
+                      All rights reserved | This template is made with
+                      <i
+                        class="fa fa-heart color-danger"
+                        aria-hidden="true"
+                      ></i>
+                      by
+                      <a
+                        href="https://colorlib.com/"
+                        target="_blank"
+                        rel="nofollow noopener"
+                        >Colorlib</a
+                      >
+                    </p>
+                  </div>
+                </div>
+                <div class="col-xl-6 col-lg-7">
+                  <div class="header-area header-area2">
+                    <div class="main-header main-header2">
+                      <div class="menu-wrapper">
+                        <div class="main-menu">
+                          <nav>
+                            <ul>
+                              <li><a href="index-2.html">Home</a></li>
+                              <li><a href="work.html">work</a></li>
+                              <li><a href="service.html">service</a></li>
+                              <li><a href="blog.html">Blog</a></li>
+                              <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                          </nav>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="back-top">
+      <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
+
+    <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/popper.min.js%2bbootstrap.min.js.pagespeed.jc.2cNIGpkQNt.js"></script>
+    <script>
+      eval(mod_pagespeed_xG7yePciqA);
+    </script>
+    <script>
+      eval(mod_pagespeed_jplwFBmz64);
+    </script>
+
+    <script src="assets/js/owl.carousel.min.js%2bslick.min.js.pagespeed.jc.yB90iVHRRx.js"></script>
+    <script>
+      eval(mod_pagespeed_ayYoDTF2HC);
+    </script>
+    <script>
+      eval(mod_pagespeed_do93p0CdfB);
+    </script>
+    <script src="assets/js/jquery.slicknav.min.js%2bjquery.nice-select.min.js%2bwow.min.js%2banimated.headline.js%2bjquery.magnific-popup.js%2bjquery.barfiller.js%2bjquery.counterup.min.js%2bwaypoints.min"></script>
+    <script>
+      eval(mod_pagespeed_pYmYlr1V15);
+    </script>
+    <script>
+      eval(mod_pagespeed_uF_Hs0R1yK);
+    </script>
+
+    <script>
+      eval(mod_pagespeed_t3UUIvS1E_);
+    </script>
+    <script>
+      eval(mod_pagespeed_lM_BWDydAX);
+    </script>
+    <script>
+      eval(mod_pagespeed_s3tj7VzYa3);
+    </script>
+    <script>
+      eval(mod_pagespeed_LEw5PMV_A6);
+    </script>
+
+    <script>
+      eval(mod_pagespeed_pP4tZQ6a7n);
+    </script>
+    <script>
+      eval(mod_pagespeed_WB340Cn6IE);
+    </script>
+    <script>
+      eval(mod_pagespeed_Fe4p2XJz0Z);
+    </script>
+    <script>
+      eval(mod_pagespeed_EjbAk$9k12);
+    </script>
+
+    <script>
+      eval(mod_pagespeed_Uth7txuY3R);
+    </script>
+    <script src="assets/js/jquery.form.js%2bjquery.validate.min.js%2bmail-script.js%2bjquery.ajaxchimp.min.js%2bplugins.js%2bmain.js.pagespeed.jc.GwKNnC35s8.js"></script>
+    <script>
+      eval(mod_pagespeed_aNeETzPeVv);
+    </script>
+    <script>
+      eval(mod_pagespeed_vGw_gt1VZ3);
+    </script>
+    <script>
+      eval(mod_pagespeed_7vys0cqgn5);
+    </script>
+    <script>
+      eval(mod_pagespeed_MVQs$cAFal);
+    </script>
+
+    <script>
+      eval(mod_pagespeed_wW8jRF4g__);
+    </script>
+    <script>
+      eval(mod_pagespeed_9MjzCwZCcN);
+    </script>
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-23581568-13");
+    </script>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194"
+      integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw=="
+      data-cf-beacon='{"rayId":"753fcb837d5c790b","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.8.1","si":100}'
+      crossorigin="anonymous"
+    ></script>
+  </body>
+
+  <!-- Mirrored from preview.colorlib.com/theme/calvin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 02 Oct 2022 19:20:51 GMT -->
+</html>
