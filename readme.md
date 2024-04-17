@@ -9,7 +9,7 @@
 
 - 🔭 I’m currently working on [Fight club](https://github.com/Yuhannakapali/fight-club)
 
-- 🌱 I’m currently learning **Flutter**
+- 🌱 I’m currently learning **Go**
 
 - 👯 I’m looking to collaborate on [Fight Club](https://github.com/Yuhannakapali/fight-club)
 
