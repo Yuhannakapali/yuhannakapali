@@ -23,7 +23,7 @@ export function Hero() {
               Yuhanna Kapali.
             </h1>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-500 dark:text-slate-400">
-              Backend Developer.
+              Software Engineer.
             </h2>
           </motion.div>
 
