@@ -1,16 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-
-const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Experience", href: "#experience" },
-  { name: "Contact", href: "#contact" },
-];
+import { NAV_LINKS, SITE } from "@/app/lib/constants";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,12 +35,12 @@ export function Navbar() {
               href="#"
               className="text-xl font-bold text-slate-900 dark:text-slate-100 font-mono"
             >
-              YK
+              {SITE.initials}
             </a>
           </div>
           <div className="hidden md:flex items-center">
             <div className="ml-10 flex items-baseline space-x-4">
-              {navLinks.map((link) => (
+              {NAV_LINKS.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
@@ -93,7 +86,7 @@ export function Navbar() {
           className="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800"
         >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map((link) => (
+            {NAV_LINKS.map((link) => (
               <a
                 key={link.name}
                 href={link.href}

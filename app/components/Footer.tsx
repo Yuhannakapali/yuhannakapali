@@ -1,4 +1,4 @@
-import React from "react";
+import { SITE } from "@/app/lib/constants";
 
 export function Footer() {
   return (
@@ -8,7 +8,7 @@ export function Footer() {
           href="#"
           className="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
         >
-          Designed & Built by Yuhanna Kapali
+          Designed & Built by {SITE.name}
         </a>
       </div>
       <p>&copy; {new Date().getFullYear()} All rights reserved.</p>

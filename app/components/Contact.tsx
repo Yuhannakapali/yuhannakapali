@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { SocialLinks } from "./SocialLinks";
+import { SITE } from "@/app/lib/constants";
 
 export function Contact() {
   return (
@@ -28,31 +29,14 @@ export function Contact() {
           </p>
 
           <a
-            href="mailto:yuhannakapali@gmail.com"
+            href={`mailto:${SITE.email}`}
             className="inline-flex items-center px-8 py-4 border border-cyan-500 text-cyan-600 dark:text-cyan-400 rounded hover:bg-cyan-500/10 transition-colors font-mono text-sm tracking-wide"
           >
             Say Hello
           </a>
 
-          <div className="mt-16 flex justify-center gap-8 md:hidden">
-            <a
-              href="#"
-              className="text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 transition-colors"
-            >
-              <Github size={24} />
-            </a>
-            <a
-              href="#"
-              className="text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 transition-colors"
-            >
-              <Linkedin size={24} />
-            </a>
-            <a
-              href="#"
-              className="text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 transition-colors"
-            >
-              <Twitter size={24} />
-            </a>
+          <div className="mt-16 flex justify-center md:hidden">
+            <SocialLinks size={24} />
           </div>
         </motion.div>
       </div>

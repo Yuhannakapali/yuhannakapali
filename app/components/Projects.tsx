@@ -72,7 +72,6 @@ export function Projects() {
               <div className="w-full md:w-3/5 relative group">
                 <div className="relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
                   <div className="absolute inset-0 bg-cyan-500/10 dark:bg-cyan-500/20 mix-blend-multiply group-hover:bg-transparent transition-all duration-300 z-10"></div>
-                  {/* <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-all duration-300 z-10"></div> */}
                   <img
                     src={project.image}
                     alt={project.title}

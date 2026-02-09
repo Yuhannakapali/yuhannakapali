@@ -1,16 +1,6 @@
 "use client";
-import React from "react";
 import { motion } from "framer-motion";
-import {
-  Code,
-  Database,
-  Layout,
-  Server,
-  Smartphone,
-  Globe,
-  PenTool,
-  Cpu,
-} from "lucide-react";
+import { Database, Layout, Server, Cpu } from "lucide-react";
 
 const skills = [
   {
