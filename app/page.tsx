@@ -24,7 +24,7 @@ export default function App() {
       <div className="hidden md:block fixed left-10 bottom-0 z-50">
         <div className="flex flex-col items-center gap-6 after:content-[''] after:block after:w-px after:h-24 after:bg-slate-400 after:mt-6">
           <a
-            href="#"
+            href="https://github.com/Yuhannakapali"
             className="text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 hover:-translate-y-1 transition-all duration-300"
           >
             <svg
@@ -43,7 +43,7 @@ export default function App() {
             </svg>
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/yuhanna-kapali-36334911a/"
             className="text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 hover:-translate-y-1 transition-all duration-300"
           >
             <svg
@@ -62,8 +62,8 @@ export default function App() {
               <circle cx="4" cy="4" r="2" />
             </svg>
           </a>
-          <a
-            href="#"
+          {/* <a
+            href="https://www.linkedin.com/in/yuhanna-kapali-36334911a/"
             className="text-slate-500 hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan-400 hover:-translate-y-1 transition-all duration-300"
           >
             <svg
@@ -79,7 +79,7 @@ export default function App() {
             >
               <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
             </svg>
-          </a>
+          </a> */}
         </div>
       </div>
 

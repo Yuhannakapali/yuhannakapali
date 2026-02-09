@@ -1,37 +1,49 @@
 "use client";
-import React from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Calendar } from "lucide-react";
+import { Calendar } from "lucide-react";
 
 const experiences = [
   {
-    company: "TechCorp Inc.",
-    role: "Senior Frontend Engineer",
-    period: "2023 - Present",
+    company: "GoGroup",
+    role: "Senior Software Engineer",
+    period: "Jan 2024 - Present",
     description: [
-      "Lead a team of 5 developers in rebuilding the core product dashboard using Next.js and TypeScript.",
-      "Improved site performance by 40% through code splitting and image optimization.",
-      "Collaborated with designers to implement a new design system across 3 products.",
+      "Backend development using Node.js and TypeScript, designing and implementing robust REST APIs and service components to support core operational workflows.",
+      "Architect, deploy, and maintain services in AWS, ensuring scalable, resilient environments for production-grade railway operations.",
+      "Collaborate with cross-functional teams to optimize performance, improve data flow reliability, and support continuous delivery in a monolithic application handling complex domain logic.",
+      "Improve system observability and operational efficiency through feature enhancements, bug fixes, and performance tuning based on real usage patterns and internal metrics.",
     ],
   },
   {
-    company: "StartupX",
-    role: "Full Stack Developer",
-    period: "2021 - 2023",
+    company: "Moichor",
+    role: "Software Engineer",
+    period: "Jul 2022 - Aug 2023",
     description: [
-      "Developed and maintained multiple client-facing applications using React and Node.js.",
-      "Implemented automated testing pipelines (CI/CD) reducing deployment errors by 25%.",
-      "Mentored junior developers and conducted code reviews.",
+      "Built and deployed a full-stack web application using Node.js (backend) and React (frontend) to support key features of Moichor's diagnostic platform.",
+      "Leveraged Webpack and Babel to optimize bundling and ensure efficient, performant client-side execution.",
+      "Designed and implemented RESTful APIs using Node.js and Express, enabling reliable data access and integration with diagnostic services and platform workflows.",
+      "Developed serverless functions on Lambda, enhancing scalability and reducing operational overhead for event-driven processes.",
     ],
   },
   {
-    company: "WebSolutions Agency",
-    role: "Junior Web Developer",
-    period: "2019 - 2021",
+    company: "Kotuko",
+    role: "Software Engineer",
+    period: "Apr 2021 - Jun 2022",
     description: [
-      "Built responsive websites for diverse clients using HTML, SCSS, and JavaScript.",
-      "Worked closely with clients to gather requirements and deliver projects on time.",
-      "Maintained legacy WordPress sites and implemented security updates.",
+      "Worked within a cross-functional Agile team, contributing to the design, development, and delivery of scalable web applications using TypeScript, GraphQL, React, Next.js, PostgreSQL, and NoSQL technologies.",
+      "Applied functional programming principles to enhance code readability, modularity, and maintainability across the backend and frontend codebase.",
+      "Implemented real-time features using WebSockets, enabling live updates and interactive experiences for end users.",
+      "Structured data access with clean, maintainable patterns that improved development velocity and reduced technical debt.",
+    ],
+  },
+  {
+    company: "Kodiary",
+    role: "Software Engineer",
+    period: "Jul 2020 - Mar 2021",
+    description: [
+      "Worked with agile methodology using technologies: JavaScript, TypeScript, REST, MySQL, Vue, Nuxt, PHP, SOAP.",
+      "Applied functional programming principles to improve code clarity, predictability, and long-term maintainability across the application.",
+      "Implemented widget-driven development to ensure optimized data flow.",
     ],
   },
 ];

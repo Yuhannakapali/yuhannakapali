@@ -42,7 +42,7 @@ export function Navbar() {
               href="#"
               className="text-xl font-bold text-slate-900 dark:text-slate-100 font-mono"
             >
-              &lt;Dev/&gt;
+              YK
             </a>
           </div>
           <div className="hidden md:flex items-center">

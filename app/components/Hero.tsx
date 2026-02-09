@@ -23,7 +23,7 @@ export function Hero() {
               Yuhanna Kapali.
             </h1>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-slate-500 dark:text-slate-400">
-              I build things.
+              Backend Developer.
             </h2>
           </motion.div>
 
@@ -33,10 +33,11 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg text-slate-600 dark:text-slate-400 max-w-lg mx-auto md:mx-0 leading-relaxed"
           >
-            I'm a software engineer specializing in building (and occasionally
-            designing) exceptional digital experiences. Currently, I'm focused
-            on building accessible, human-centered products at{" "}
-            <span className="text-cyan-600 dark:text-cyan-400">TechCorp</span>.
+            Backend-focused Software Engineer with 5+ years of experience
+            designing, building, and maintaining scalable web applications.
+            Strong expertise in Node.js, TypeScript, REST APIs, databases, and
+            cloud-native environments. Currently building reliable systems at{" "}
+            <span className="text-cyan-600 dark:text-cyan-400">GoGroup</span>.
           </motion.p>
 
           <motion.div
@@ -105,7 +106,7 @@ export function Hero() {
             <div className="absolute inset-0 border-2 border-cyan-500 rounded-lg translate-x-4 translate-y-4"></div>
             <div className="absolute inset-0 bg-cyan-500/10 dark:bg-cyan-500/20 rounded-lg overflow-hidden grayscale hover:grayscale-0 transition-all duration-300">
               <img
-                src="https://images.unsplash.com/photo-1752859951149-7d3fc700a7ec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMGRldmVsb3BlciUyMHBvcnRyYWl0JTIwcHJvZmVzc2lvbmFsfGVufDF8fHx8MTc3MDYxNjk5Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="/hero.jpg"
                 alt="Portrait"
                 className="w-full h-full object-cover rounded-lg"
               />

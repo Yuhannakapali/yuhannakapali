@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
 
@@ -55,7 +54,7 @@ export function Projects() {
               03.
             </span>{" "}
             Some Things I've Built
-            <span className="ml-4 h-px bg-slate-300 dark:bg-slate-700 flex-grow max-w-xs"></span>
+            <span className="ml-4 h-px bg-slate-300 dark:bg-slate-700 grow max-w-xs"></span>
           </h2>
         </motion.div>
 

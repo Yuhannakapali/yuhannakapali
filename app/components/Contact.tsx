@@ -22,13 +22,13 @@ export function Contact() {
             Get In Touch
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-lg mb-10 leading-relaxed">
-            I'm currently looking for new opportunities, and my inbox is always
-            open. Whether you have a question or just want to say hi, I'll try
-            my best to get back to you!
+            I'm always open to new opportunities and interesting conversations.
+            Whether you have a project in mind or just want to connect, feel
+            free to reach out!
           </p>
 
           <a
-            href="mailto:hello@example.com"
+            href="mailto:yuhannakapali@gmail.com"
             className="inline-flex items-center px-8 py-4 border border-cyan-500 text-cyan-600 dark:text-cyan-400 rounded hover:bg-cyan-500/10 transition-colors font-mono text-sm tracking-wide"
           >
             Say Hello

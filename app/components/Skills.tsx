@@ -14,24 +14,24 @@ import {
 
 const skills = [
   {
-    name: "Frontend",
-    icon: Layout,
-    items: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Redux"],
-  },
-  {
     name: "Backend",
     icon: Server,
-    items: ["Node.js", "Express", "Python", "Go", "GraphQL"],
+    items: ["Node.js", "TypeScript", "REST APIs", "GraphQL", "PHP"],
+  },
+  {
+    name: "Frontend",
+    icon: Layout,
+    items: ["React", "Next.js", "Vue", "Nuxt", "Tailwind CSS"],
   },
   {
     name: "Database",
     icon: Database,
-    items: ["PostgreSQL", "MongoDB", "Redis", "Firebase", "Supabase"],
+    items: ["PostgreSQL", "MySQL", "MongoDB", "Redis"],
   },
   {
-    name: "DevOps",
+    name: "DevOps & Tools",
     icon: Cpu,
-    items: ["Docker", "AWS", "CI/CD", "Linux", "Git"],
+    items: ["AWS", "Docker", "Kubernetes", "Git", "CI/CD"],
   },
 ];
 
