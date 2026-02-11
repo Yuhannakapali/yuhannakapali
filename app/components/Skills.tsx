@@ -6,7 +6,15 @@ const skills = [
   {
     name: "Backend",
     icon: Server,
-    items: ["Node.js", "TypeScript", "REST APIs", "GraphQL", "PHP"],
+    items: [
+      "Node.js",
+      "TypeScript",
+      "REST APIs",
+      "GraphQL",
+      "PHP",
+      "GO",
+      "PYTHON",
+    ],
   },
   {
     name: "Frontend",
