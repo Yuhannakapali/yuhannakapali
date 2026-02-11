@@ -47,7 +47,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
       >
         <button
           onClick={() => router.back()}
-          className="flex items-center text-cyan-400 hover:text-cyan-300 mb-8 font-mono text-sm group"
+          className="flex items-center text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 mb-8 font-mono text-sm group"
         >
           <ArrowLeft
             size={16}
@@ -57,10 +57,10 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
         </button>
 
         <header className="mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold text-slate-100 mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-slate-100 mb-6">
             {project.title}
           </h1>
-          <p className="text-xl text-slate-400 max-w-3xl leading-relaxed">
+          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
             {project.description}
           </p>
 
@@ -68,7 +68,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="px-3 py-1 bg-slate-800 text-cyan-400 text-sm font-mono rounded-full border border-slate-700"
+                className="px-3 py-1 bg-slate-200 dark:bg-slate-800 text-cyan-700 dark:text-cyan-400 text-sm font-mono rounded-full border border-slate-300 dark:border-slate-700"
               >
                 {t}
               </span>
@@ -78,14 +78,14 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
           <div className="flex items-center gap-6 mt-8">
             <a
               href={project.github}
-              className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors border-b border-transparent hover:border-cyan-400 pb-0.5"
+              className="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors border-b border-transparent hover:border-cyan-600 dark:hover:border-cyan-400 pb-0.5"
             >
               <Github size={20} />
               <span>View Source</span>
             </a>
             <a
               href={project.live}
-              className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors border-b border-transparent hover:border-cyan-400 pb-0.5"
+              className="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors border-b border-transparent hover:border-cyan-600 dark:hover:border-cyan-400 pb-0.5"
             >
               <ExternalLink size={20} />
               <span>Live Demo</span>
@@ -94,7 +94,7 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <div className="rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
+          <div className="rounded-xl overflow-hidden border border-slate-300 dark:border-slate-800 shadow-2xl bg-slate-100 dark:bg-slate-900">
             <Image
               src={project.image}
               alt={project.title}
@@ -107,43 +107,48 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
           <div className="space-y-10">
             <section>
               <div className="flex items-center gap-3 mb-4">
-                <Target className="text-cyan-400" size={24} />
-                <h2 className="text-2xl font-bold text-slate-100">
+                <Target
+                  className="text-cyan-600 dark:text-cyan-400"
+                  size={24}
+                />
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                   The Problem
                 </h2>
               </div>
-              <p className="text-slate-300 leading-relaxed text-lg">
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">
                 {project.problem}
               </p>
             </section>
 
             <section>
               <div className="flex items-center gap-3 mb-4">
-                <Cpu className="text-cyan-400" size={24} />
-                <h2 className="text-2xl font-bold text-slate-100">
+                <Cpu className="text-cyan-600 dark:text-cyan-400" size={24} />
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                   Technical Solution
                 </h2>
               </div>
-              <p className="text-slate-300 leading-relaxed text-lg">
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">
                 {project.technicalDescription}
               </p>
             </section>
           </div>
         </div>
 
-        <section className="bg-slate-900/50 rounded-2xl p-8 border border-slate-800">
-          <h2 className="text-2xl font-bold text-slate-100 mb-8 flex items-center">
-            <Code className="text-cyan-400 mr-3" />
+        <section className="bg-slate-100/50 dark:bg-slate-900/50 rounded-2xl p-8 border border-slate-300 dark:border-slate-800">
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-8 flex items-center">
+            <Code className="text-cyan-600 dark:text-cyan-400 mr-3" />
             Key Features
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {project.features?.map((feature, idx) => (
               <div key={idx} className="flex items-start">
                 <CheckCircle
-                  className="text-cyan-500 mr-3 mt-1 shrink-0"
+                  className="text-cyan-600 dark:text-cyan-500 mr-3 mt-1 shrink-0"
                   size={18}
                 />
-                <span className="text-slate-300">{feature}</span>
+                <span className="text-slate-700 dark:text-slate-300">
+                  {feature}
+                </span>
               </div>
             ))}
           </div>
