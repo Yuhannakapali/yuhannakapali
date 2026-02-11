@@ -8,7 +8,7 @@ const projects = [
     description:
       "A comprehensive analytics dashboard for online retailers. Features real-time sales tracking, inventory management, and customizable reporting widgets.",
     tech: ["React", "TypeScript", "Tailwind", "Recharts"],
-    image: "/railsync.png",
+    image: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/railsync.png`,
     github: "#",
     live: "https://www.railsync.app/",
   },
@@ -17,7 +17,7 @@ const projects = [
     description:
       "A productivity application designed for remote teams. Includes drag-and-drop task management, team chat, and file sharing capabilities.",
     tech: ["Next.js", "Supabase", "Framer Motion", "Radix UI"],
-    image: "/Arriana.jpg",
+    image: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/Arriana.jpg`,
     github: "#",
     live: "#",
   },
