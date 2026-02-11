@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Yuhanna Kapali",
   initials: "YK",
-  title: "Backend Developer",
+  title: "Software Engineer",
   email: "yuhannakapali@gmail.com",
   location: "Kathmandu, Nepal",
 } as const;

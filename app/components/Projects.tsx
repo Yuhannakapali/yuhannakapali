@@ -1,39 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import { Github, ExternalLink } from "lucide-react";
-
-const projects = [
-  {
-    title: "E-Commerce Dashboard",
-    description:
-      "A comprehensive analytics dashboard for online retailers. Features real-time sales tracking, inventory management, and customizable reporting widgets.",
-    tech: ["React", "TypeScript", "Tailwind", "Recharts"],
-    image:
-      "https://images.unsplash.com/photo-1623278132336-bd316c0f9c78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXNoYm9hcmQlMjB1aSUyMGRlc2lnbiUyMG1pbmltYWxpc3R8ZW58MXx8fHwxNzcwNjE2OTkyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "Task Master App",
-    description:
-      "A productivity application designed for remote teams. Includes drag-and-drop task management, team chat, and file sharing capabilities.",
-    tech: ["Next.js", "Supabase", "Framer Motion", "Radix UI"],
-    image:
-      "https://images.unsplash.com/photo-1661246627162-feb0269e0c07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBpbnRlcmZhY2UlMjBkZXNpZ258ZW58MXx8fHwxNzcwNTk1NzQ1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "CodeSnippet Share",
-    description:
-      "A social platform for developers to share and discover code snippets. Syntax highlighting, commenting system, and user profiles included.",
-    tech: ["Vue.js", "Firebase", "Tailwind", "Prism.js"],
-    image:
-      "https://images.unsplash.com/photo-1753998943228-73470750c597?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjb2RlJTIwZWRpdG9yJTIwc2NyZWVuJTIwZGFyayUyMG1vZGV8ZW58MXx8fHwxNzcwNjE2OTkyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    github: "#",
-    live: "#",
-  },
-];
+import { Github, ExternalLink, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { projects } from "../lib/projects";
+import Link from "next/link";
 
 export function Projects() {
   return (
@@ -53,7 +23,7 @@ export function Projects() {
             <span className="text-cyan-600 dark:text-cyan-400 font-mono mr-2">
               03.
             </span>{" "}
-            Some Things I've Built
+            Some Things I&apos;ve Built
             <span className="ml-4 h-px bg-slate-300 dark:bg-slate-700 grow max-w-xs"></span>
           </h2>
         </motion.div>
@@ -69,15 +39,30 @@ export function Projects() {
               className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-8 md:gap-12`}
             >
               {/* Image Side */}
-              <div className="w-full md:w-3/5 relative group">
+              {/* <div className="w-full md:w-3/5 relative group">
                 <div className="relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800">
                   <div className="absolute inset-0 bg-cyan-500/10 dark:bg-cyan-500/20 mix-blend-multiply group-hover:bg-transparent transition-all duration-300 z-10"></div>
-                  <img
+                  <Image
                     src={project.image}
                     alt={project.title}
+                    width={800}
+                    height={600}
                     className="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
                   />
                 </div>
+              </div> */}
+
+              <div className="w-full md:w-3/5 relative group cursor-pointer">
+                <Link href={`/project/${project.id}`}>
+                  <div className="relative rounded-lg overflow-hidden border border-slate-800">
+                    <div className="absolute inset-0 bg-cyan-500/20 mix-blend-multiply group-hover:bg-transparent transition-all duration-300 z-10"></div>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-300 transform group-hover:scale-105"
+                    />
+                  </div>
+                </Link>
               </div>
 
               {/* Content Side */}
@@ -95,6 +80,14 @@ export function Projects() {
                   className={`bg-slate-100 dark:bg-slate-800 p-6 rounded-lg text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4 shadow-xl ${index % 2 === 0 ? "md:-ml-16 z-20" : "md:-mr-16 z-20"}`}
                 >
                   {project.description}
+                  <div className="mt-4 pt-4 border-t border-slate-700/50">
+                    <Link
+                      href={`/project/${project.id}`}
+                      className="text-cyan-400 hover:text-cyan-300 flex items-center gap-1 font-mono text-xs uppercase tracking-wider"
+                    >
+                      Read Case Study <ArrowRight size={14} />
+                    </Link>
+                  </div>
                 </div>
 
                 <ul
