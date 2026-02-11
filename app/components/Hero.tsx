@@ -82,7 +82,7 @@ export function Hero() {
             <div className="absolute inset-0 border-2 border-cyan-500 rounded-lg translate-x-4 translate-y-4"></div>
             <div className="absolute inset-0 bg-cyan-500/10 dark:bg-cyan-500/20 rounded-lg overflow-hidden grayscale hover:grayscale-0 transition-all duration-300">
               <img
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/hero.jpg`}
+                src={`/hero.jpg`}
                 alt="Portrait"
                 className="w-full h-full object-cover rounded-lg"
               />
