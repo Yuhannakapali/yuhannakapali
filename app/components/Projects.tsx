@@ -51,7 +51,7 @@ export function Projects() {
             <span className="text-cyan-600 dark:text-cyan-400 font-mono mr-2">
               03.
             </span>{" "}
-            Some Things I've Built
+            Some Things I&apos;ve Built
             <span className="ml-4 h-px bg-slate-300 dark:bg-slate-700 grow max-w-xs"></span>
           </h2>
         </motion.div>
