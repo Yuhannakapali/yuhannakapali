@@ -44,7 +44,7 @@ export const projects = [
       "Bluetooth Low Energy",
       "JavaScript",
     ],
-    image: "/arriana.jpg",
+    image: "/arianna.jpg",
     github: "#",
     live: "#",
     problem:
