@@ -4,22 +4,20 @@ import { Github, ExternalLink } from "lucide-react";
 
 const projects = [
   {
-    title: "E-Commerce Dashboard",
+    title: "RailSync",
     description:
       "A comprehensive analytics dashboard for online retailers. Features real-time sales tracking, inventory management, and customizable reporting widgets.",
     tech: ["React", "TypeScript", "Tailwind", "Recharts"],
-    image:
-      "https://images.unsplash.com/photo-1623278132336-bd316c0f9c78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXNoYm9hcmQlMjB1aSUyMGRlc2lnbiUyMG1pbmltYWxpc3R8ZW58MXx8fHwxNzcwNjE2OTkyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    image: "/railsync.png",
     github: "#",
-    live: "#",
+    live: "https://www.railsync.app/",
   },
   {
-    title: "Task Master App",
+    title: "Arianna",
     description:
       "A productivity application designed for remote teams. Includes drag-and-drop task management, team chat, and file sharing capabilities.",
     tech: ["Next.js", "Supabase", "Framer Motion", "Radix UI"],
-    image:
-      "https://images.unsplash.com/photo-1661246627162-feb0269e0c07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBpbnRlcmZhY2UlMjBkZXNpZ258ZW58MXx8fHwxNzcwNTk1NzQ1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    image: "/Arriana.jpg",
     github: "#",
     live: "#",
   },
