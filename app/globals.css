@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -9,4 +10,111 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Serif reading font used by published articles and the /write editor,
+   so drafting looks identical to the final post. */
+.font-article {
+  font-family: Charter, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+/* Medium-style pale green selection highlight for the writing editor. */
+.editor-surface ::selection {
+  background: rgba(180, 215, 190, 0.6);
+}
+
+/* Tiptap placeholders: only the empty first line shows "Tell your story..." */
+.editor-surface .tiptap p.is-editor-empty:first-child::before,
+.editor-surface .tiptap h1.is-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  color: #b3b3b3;
+}
+
+.editor-surface .tiptap:focus {
+  outline: none;
+}
+
+/* Article/editor body element styles that are awkward to express per-node. */
+.editor-surface .tiptap blockquote {
+  border-left: 3px solid #000;
+  padding-left: 1.25rem;
+  font-style: italic;
+  color: #6b6b6b;
+  font-size: 24px;
+  margin: 1.5rem 0;
+}
+
+.editor-surface .tiptap h2 {
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  margin-top: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.editor-surface .tiptap h3 {
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.editor-surface .tiptap p {
+  margin-top: 2em;
+}
+
+.editor-surface .tiptap p:first-child {
+  margin-top: 0;
+}
+
+.editor-surface .tiptap ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-top: 2em;
+}
+
+.editor-surface .tiptap ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin-top: 2em;
+}
+
+.editor-surface .tiptap pre {
+  background: #f2f2f2;
+  border-radius: 0.5rem;
+  padding: 16px;
+  font-size: 14px;
+  font-family: var(--font-geist-mono), monospace;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.editor-surface .tiptap code {
+  background: #f2f2f2;
+  border-radius: 4px;
+  padding: 0.1em 0.3em;
+  font-size: 0.85em;
+  font-family: var(--font-geist-mono), monospace;
+}
+
+.editor-surface .tiptap pre code {
+  background: none;
+  padding: 0;
+  font-size: 14px;
+}
+
+.editor-surface .tiptap a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.editor-surface .tiptap img {
+  width: 100%;
+  border-radius: 4px;
+  margin: 2rem 0;
 }

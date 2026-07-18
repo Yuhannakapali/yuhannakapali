@@ -94,13 +94,13 @@ export function ProjectDetailClient({ project }: ProjectDetailClientProps) {
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <div className="rounded-xl overflow-hidden border border-slate-300 dark:border-slate-800 shadow-2xl bg-slate-100 dark:bg-slate-900">
+          <div className="rounded-xl overflow-hidden border border-slate-300 dark:border-slate-800 shadow-2xl flex">
             <Image
               src={project.image}
               alt={project.title}
               width={600}
               height={400}
-              className="w-full h-auto object-cover"
+              className="w-full h-auto object-cover block"
             />
           </div>
 
