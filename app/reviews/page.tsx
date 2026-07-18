@@ -15,18 +15,18 @@ export default function ReviewsIndexPage() {
   const reviews = getAllReviews();
 
   return (
-    <div className="flex min-h-screen flex-col bg-white text-[#242424]">
+    <div className="flex min-h-screen flex-col bg-surface-2 text-surface-text">
       <Navbar />
       <main className="mx-auto w-full max-w-[680px] grow px-5 pt-28 pb-24">
         <h1 className="font-display mb-3 text-[34px] font-semibold tracking-tight">
           Film
         </h1>
-        <p className="mb-10 text-[16px] text-[#6b6b6b]">
+        <p className="mb-10 text-[16px] text-surface-muted">
           Films I have watched and what stayed with me.
         </p>
 
         {reviews.length === 0 ? (
-          <p className="text-[#6b6b6b]">No reviews yet. Check back soon.</p>
+          <p className="text-surface-muted">No reviews yet. Check back soon.</p>
         ) : (
           <div className="flex flex-col">
             {reviews.map((review) => (
@@ -35,13 +35,13 @@ export default function ReviewsIndexPage() {
                   <h2 className="text-[20px] font-bold leading-snug tracking-tight group-hover:text-marigold">
                     {review.title}
                   </h2>
-                  <p className="mt-1 text-[16px] text-[#6b6b6b]">
+                  <p className="mt-1 text-[16px] text-surface-muted">
                     {review.film}
                     {review.year ? ` (${review.year})` : ""}
                   </p>
                   <div className="mt-3 flex items-center gap-3">
                     <StarRating rating={review.rating} />
-                    <span className="text-[13px] text-[#6b6b6b]">
+                    <span className="text-[13px] text-surface-muted">
                       {formatDate(review.date)}
                     </span>
                   </div>

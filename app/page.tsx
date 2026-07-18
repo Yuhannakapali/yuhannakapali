@@ -8,6 +8,9 @@ import { Footer } from "./components/Footer";
 import { HeroSection } from "./components/HeroSection";
 import { AboutImage } from "./components/AboutImage";
 import { StarRating } from "./components/StarRating";
+import { Skills } from "./components/Skills";
+import { Experience } from "./components/Experience";
+import { Reveal, Stagger, StaggerItem } from "./components/Reveal";
 
 const FEED_LABELS: Record<string, string> = {
   blog: "Blog",
@@ -33,23 +36,21 @@ export default function LandingPage() {
   const latest = getLatestAcrossAll(5);
 
   return (
-    <div className="min-h-screen bg-snow text-graphite">
+    <div className="min-h-screen bg-surface text-surface-text">
       <Navbar />
       <main>
         <HeroSection />
 
         {/* Three trailheads */}
         <section className="mx-auto max-w-6xl px-5 py-20 md:py-28">
-          <div className="grid grid-cols-1 divide-y divide-black/10 md:grid-cols-3 md:divide-x md:divide-y-0">
+          <Stagger className="grid grid-cols-1 divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0">
             {/* Writing */}
-            <Link
-              href="/blog"
-              className="group block py-8 md:px-8 md:py-0 md:first:pl-0"
-            >
+            <StaggerItem className="py-8 md:px-8 md:py-0 md:first:pl-0">
+            <Link href="/blog" className="group block">
               <h2 className="font-display inline-flex items-center gap-2 text-[26px] font-semibold tracking-tight transition-colors group-hover:text-marigold">
                 Writing <Arrow />
               </h2>
-              <p className="mt-2 text-[15px] text-[#6b6b6b]">
+              <p className="mt-2 text-[15px] text-surface-muted">
                 Notes on building software, the craft, and the tools I make.
               </p>
               <ul className="mt-5 space-y-3">
@@ -58,23 +59,25 @@ export default function LandingPage() {
                     <span className="block text-[15px] font-medium leading-snug">
                       {p.title}
                     </span>
-                    <span className="text-[13px] text-[#8b8b8b]">
+                    <span className="text-[13px] text-surface-faint">
                       {formatDate(p.date)}
                     </span>
                   </li>
                 ))}
                 {posts.length === 0 ? (
-                  <li className="text-[14px] text-[#8b8b8b]">Coming soon.</li>
+                  <li className="text-[14px] text-surface-faint">Coming soon.</li>
                 ) : null}
               </ul>
             </Link>
+            </StaggerItem>
 
             {/* Film */}
-            <Link href="/reviews" className="group block py-8 md:px-8 md:py-0">
+            <StaggerItem className="py-8 md:px-8 md:py-0">
+            <Link href="/reviews" className="group block">
               <h2 className="font-display inline-flex items-center gap-2 text-[26px] font-semibold tracking-tight transition-colors group-hover:text-marigold">
                 Film <Arrow />
               </h2>
-              <p className="mt-2 text-[15px] text-[#6b6b6b]">
+              <p className="mt-2 text-[15px] text-surface-muted">
                 Short reviews of the films I keep thinking about.
               </p>
               <ul className="mt-5 space-y-3">
@@ -89,20 +92,19 @@ export default function LandingPage() {
                   </li>
                 ))}
                 {reviews.length === 0 ? (
-                  <li className="text-[14px] text-[#8b8b8b]">Coming soon.</li>
+                  <li className="text-[14px] text-surface-faint">Coming soon.</li>
                 ) : null}
               </ul>
             </Link>
+            </StaggerItem>
 
             {/* Treks */}
-            <Link
-              href="/treks"
-              className="group block py-8 md:px-8 md:py-0 md:last:pr-0"
-            >
+            <StaggerItem className="py-8 md:px-8 md:py-0 md:last:pr-0">
+            <Link href="/treks" className="group block">
               <h2 className="font-display inline-flex items-center gap-2 text-[26px] font-semibold tracking-tight transition-colors group-hover:text-marigold">
                 Treks <Arrow />
               </h2>
-              <p className="mt-2 text-[15px] text-[#6b6b6b]">
+              <p className="mt-2 text-[15px] text-surface-muted">
                 Field guides to trails in the Nepal Himalaya.
               </p>
               <ul className="mt-5 space-y-3">
@@ -111,7 +113,7 @@ export default function LandingPage() {
                     <span className="block text-[15px] font-medium leading-snug">
                       {t.title}
                     </span>
-                    <span className="text-[13px] text-[#8b8b8b]">
+                    <span className="text-[13px] text-surface-faint">
                       {[t.region, t.days ? `${t.days} days` : ""]
                         .filter(Boolean)
                         .join("  ·  ")}
@@ -119,52 +121,56 @@ export default function LandingPage() {
                   </li>
                 ))}
                 {treks.length === 0 ? (
-                  <li className="text-[14px] text-[#8b8b8b]">Coming soon.</li>
+                  <li className="text-[14px] text-surface-faint">Coming soon.</li>
                 ) : null}
               </ul>
             </Link>
-          </div>
+            </StaggerItem>
+          </Stagger>
         </section>
 
         {/* Latest, mixed feed */}
-        <section className="border-t border-black/10">
+        <section className="border-t border-line">
           <div className="mx-auto max-w-[680px] px-5 py-16 md:py-20">
-            <h2 className="font-display mb-8 text-[24px] font-semibold tracking-tight">
-              Latest
-            </h2>
-            <div className="flex flex-col">
+            <Reveal>
+              <h2 className="font-display mb-8 text-[24px] font-semibold tracking-tight">
+                Latest
+              </h2>
+            </Reveal>
+            <Stagger className="flex flex-col">
               {latest.map((item) => (
-                <Link
+                <StaggerItem
                   key={`${item.type}-${item.slug}`}
-                  href={item.href}
-                  className="group border-b border-black/5 py-5 first:pt-0 last:border-0"
+                  className="border-b border-line last:border-0"
                 >
-                  <span className="text-[11px] uppercase tracking-[0.14em] text-marigold">
-                    {FEED_LABELS[item.type]}
-                  </span>
-                  <h3 className="mt-1 text-[18px] font-bold leading-snug tracking-tight group-hover:text-marigold">
-                    {item.title}
-                  </h3>
-                  <span className="mt-1 block text-[13px] text-[#8b8b8b]">
-                    {formatDate(item.date)}
-                  </span>
-                </Link>
+                  <Link href={item.href} className="group block py-5">
+                    <span className="text-[11px] uppercase tracking-[0.14em] text-marigold">
+                      {FEED_LABELS[item.type]}
+                    </span>
+                    <h3 className="mt-1 text-[18px] font-bold leading-snug tracking-tight group-hover:text-marigold">
+                      {item.title}
+                    </h3>
+                    <span className="mt-1 block text-[13px] text-surface-faint">
+                      {formatDate(item.date)}
+                    </span>
+                  </Link>
+                </StaggerItem>
               ))}
               {latest.length === 0 ? (
-                <p className="text-[#8b8b8b]">Nothing published yet.</p>
+                <p className="text-surface-faint">Nothing published yet.</p>
               ) : null}
-            </div>
+            </Stagger>
           </div>
         </section>
 
         {/* About strip */}
-        <section id="about" className="scroll-mt-20 border-t border-black/10">
-          <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2 md:py-24">
+        <section id="about" className="scroll-mt-20 border-t border-line">
+          <Reveal className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2 md:py-24">
             <div>
               <h2 className="font-display text-[28px] font-semibold tracking-tight md:text-[32px]">
                 About
               </h2>
-              <p className="mt-5 text-[17px] leading-relaxed text-graphite">
+              <p className="mt-5 text-[17px] leading-relaxed text-surface-text">
                 I am a software engineer based in the Kathmandu Valley. I am the
                 founder of Orinova and currently working through an MBA. When I
                 am not building things, I am usually watching a film or walking
@@ -178,7 +184,7 @@ export default function LandingPage() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-graphite underline underline-offset-4 transition-colors hover:text-marigold"
+                    className="text-surface-text underline underline-offset-4 transition-colors hover:text-marigold"
                   >
                     {link.name}
                   </a>
@@ -191,8 +197,11 @@ export default function LandingPage() {
               src="/images/mountains/about.jpg"
               alt="Mountain landscape above the Kathmandu Valley"
             />
-          </div>
+          </Reveal>
         </section>
+
+        <Skills />
+        <Experience />
       </main>
       <Footer />
     </div>

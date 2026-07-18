@@ -25,28 +25,28 @@ const components: Components = {
     // Italic text on its own line right after an image becomes a caption.
     if (only && only.type === "element" && only.tagName === "em") {
       return (
-        <span className="mt-2 mb-8 block text-center text-[13px] text-[#6b6b6b]">
+        <span className="mt-2 mb-8 block text-center text-[13px] text-surface-muted">
           {children}
         </span>
       );
     }
 
     return (
-      <p className="font-article mt-[2em] text-[18px] leading-[1.58] tracking-[-0.003em] text-[#242424] first:mt-0 md:text-[20px]">
+      <p className="font-article mt-[2em] text-[18px] leading-[1.58] tracking-[-0.003em] text-surface-text first:mt-0 md:text-[20px]">
         {children}
       </p>
     );
   },
   h2({ children }) {
     return (
-      <h2 className="mt-12 mb-1 text-[24px] font-bold tracking-tight text-[#242424]">
+      <h2 className="mt-12 mb-1 text-[24px] font-bold tracking-tight text-surface-text">
         {children}
       </h2>
     );
   },
   h3({ children }) {
     return (
-      <h3 className="mt-8 mb-1 text-[20px] font-bold tracking-tight text-[#242424]">
+      <h3 className="mt-8 mb-1 text-[20px] font-bold tracking-tight text-surface-text">
         {children}
       </h3>
     );
@@ -65,21 +65,21 @@ const components: Components = {
   },
   blockquote({ children }) {
     return (
-      <blockquote className="font-article my-8 border-l-[3px] border-black pl-5 text-[24px] italic leading-snug text-[#6b6b6b]">
+      <blockquote className="font-article my-8 border-l-[3px] border-line-strong pl-5 text-[24px] italic leading-snug text-surface-muted">
         {children}
       </blockquote>
     );
   },
   ul({ children }) {
     return (
-      <ul className="font-article mt-[2em] list-disc pl-6 text-[18px] leading-[1.58] text-[#242424] md:text-[20px]">
+      <ul className="font-article mt-[2em] list-disc pl-6 text-[18px] leading-[1.58] text-surface-text md:text-[20px]">
         {children}
       </ul>
     );
   },
   ol({ children }) {
     return (
-      <ol className="font-article mt-[2em] list-decimal pl-6 text-[18px] leading-[1.58] text-[#242424] md:text-[20px]">
+      <ol className="font-article mt-[2em] list-decimal pl-6 text-[18px] leading-[1.58] text-surface-text md:text-[20px]">
         {children}
       </ol>
     );
@@ -96,7 +96,7 @@ const components: Components = {
   },
   pre({ children }) {
     return (
-      <pre className="my-8 overflow-x-auto rounded-lg bg-[#f2f2f2] p-4 text-[14px] leading-relaxed">
+      <pre className="my-8 overflow-x-auto rounded-lg bg-code p-4 text-[14px] leading-relaxed">
         {children}
       </pre>
     );
@@ -112,7 +112,7 @@ const components: Components = {
       );
     }
     return (
-      <code className="rounded bg-[#f2f2f2] px-[0.3em] py-[0.1em] font-mono text-[0.85em]">
+      <code className="rounded bg-code px-[0.3em] py-[0.1em] font-mono text-[0.85em]">
         {children}
       </code>
     );
@@ -138,20 +138,20 @@ export function Article({
   backLabel: string;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-[#242424]">
+    <div className="flex min-h-screen flex-col bg-surface-2 text-surface-text">
       <ReadingProgress />
       <Navbar />
       <main className="mx-auto w-full max-w-[680px] grow px-5 pt-24 pb-24">
         <article>
-          <h1 className="text-[32px] font-bold leading-[1.15] tracking-tight text-[#242424] md:text-[42px]">
+          <h1 className="text-[32px] font-bold leading-[1.15] tracking-tight text-surface-text md:text-[42px]">
             {title}
           </h1>
 
           <div className="mt-6 flex items-center gap-3">
             <Monogram size={44} />
             <div className="leading-tight">
-              <div className="text-[14px] text-[#242424]">Yuhanna Kapali</div>
-              <div className="text-[14px] text-[#6b6b6b]">
+              <div className="text-[14px] text-surface-text">Yuhanna Kapali</div>
+              <div className="text-[14px] text-surface-muted">
                 {formatDate(date)}
                 {date ? " · " : ""}
                 {readingTime(content)}
@@ -178,8 +178,8 @@ export function Article({
           </div>
         </article>
 
-        <div className="mt-16 border-t border-[#e6e6e6] pt-6">
-          <Link href={backHref} className="text-[14px] text-[#6b6b6b] underline">
+        <div className="mt-16 border-t border-line pt-6">
+          <Link href={backHref} className="text-[14px] text-surface-muted underline">
             {backLabel}
           </Link>
         </div>

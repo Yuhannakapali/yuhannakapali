@@ -14,13 +14,13 @@ export default function BlogIndexPage() {
   const posts = getAllPosts();
 
   return (
-    <div className="min-h-screen bg-white text-[#242424] flex flex-col">
+    <div className="min-h-screen bg-surface-2 text-surface-text flex flex-col">
       <Navbar />
       <main className="grow w-full max-w-[680px] mx-auto px-5 pt-28 pb-24">
         <h1 className="text-3xl font-bold tracking-tight mb-12">Blog</h1>
 
         {posts.length === 0 ? (
-          <p className="text-[#6b6b6b]">No posts yet. Check back soon.</p>
+          <p className="text-surface-muted">No posts yet. Check back soon.</p>
         ) : (
           <div className="flex flex-col">
             {posts.map((post) => (
@@ -34,11 +34,11 @@ export default function BlogIndexPage() {
                       {post.title}
                     </h2>
                     {post.description ? (
-                      <p className="mt-2 text-[16px] leading-relaxed text-[#6b6b6b] line-clamp-2">
+                      <p className="mt-2 text-[16px] leading-relaxed text-surface-muted line-clamp-2">
                         {post.description}
                       </p>
                     ) : null}
-                    <div className="mt-3 text-[13px] text-[#6b6b6b]">
+                    <div className="mt-3 text-[13px] text-surface-muted">
                       {formatDate(post.date)}
                       {post.date ? " · " : ""}
                       {readingTime(post.content)}

@@ -2,15 +2,16 @@
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import React from "react";
 
-// The Trailhead design is a single light theme (snow content, ink hero).
-// Force light so nothing flips with the OS preference; older pages that still
-// use dark: variants simply render in their light form.
+// Class-based light/dark theme. next-themes adds `dark` on <html>, which the
+// theme-aware surface tokens in globals.css respond to. Defaults to the
+// visitor's system preference; the navbar toggle overrides and persists it.
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <NextThemesProvider
       attribute="class"
-      forcedTheme="light"
-      enableSystem={false}
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
     >
       {children}
     </NextThemesProvider>

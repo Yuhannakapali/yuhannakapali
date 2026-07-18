@@ -556,10 +556,10 @@ export default function WritePage() {
 
   if (publish.status === "done") {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white px-6 text-[#242424]">
+      <div className="flex min-h-screen items-center justify-center bg-surface-2 px-6 text-surface-text">
         <div className="max-w-[520px] text-center">
           <h1 className="text-[28px] font-bold tracking-tight">Published</h1>
-          <p className="mt-4 text-[18px] leading-relaxed text-[#6b6b6b]">
+          <p className="mt-4 text-[18px] leading-relaxed text-surface-muted">
             Your site is rebuilding and the post will be live in a few minutes.
           </p>
           <Link
@@ -574,7 +574,7 @@ export default function WritePage() {
   }
 
   return (
-    <div className="editor-surface min-h-screen bg-white text-[#242424]">
+    <div className="editor-surface min-h-screen bg-surface-2 text-surface-text">
       {/* Minimal top bar: content-type switcher, draft indicator, menu, Publish. */}
       <div className="fixed inset-x-0 top-0 z-50 flex items-center justify-between gap-3 px-5 py-4">
         {/* Content type switcher */}
@@ -590,8 +590,8 @@ export default function WritePage() {
               }}
               className={`rounded-full px-3 py-1 transition-colors ${
                 contentType === t
-                  ? "bg-white text-[#242424] shadow-sm"
-                  : "text-[#6b6b6b] hover:text-[#242424]"
+                  ? "bg-surface-2 text-surface-text shadow-sm"
+                  : "text-surface-muted hover:text-surface-text"
               }`}
             >
               {CONTENT_META[t].label}
@@ -601,7 +601,7 @@ export default function WritePage() {
 
         <div className="flex items-center gap-3">
         <span
-          className={`text-[13px] text-[#6b6b6b] transition-opacity duration-500 ${
+          className={`text-[13px] text-surface-muted transition-opacity duration-500 ${
             draftSaved ? "opacity-100" : "opacity-0"
           }`}
         >
@@ -613,12 +613,12 @@ export default function WritePage() {
             type="button"
             onClick={() => setMenuOpen((o) => !o)}
             aria-label="More options"
-            className="rounded-full px-2 py-1 text-[18px] leading-none text-[#6b6b6b] hover:bg-black/5"
+            className="rounded-full px-2 py-1 text-[18px] leading-none text-surface-muted hover:bg-black/5"
           >
             &#8943;
           </button>
           {menuOpen ? (
-            <div className="absolute right-0 mt-2 w-44 overflow-hidden rounded-lg border border-black/10 bg-white text-[14px] shadow-lg">
+            <div className="absolute right-0 mt-2 w-44 overflow-hidden rounded-lg border border-line bg-surface-2 text-[14px] shadow-lg">
               <button
                 type="button"
                 onClick={saveDraftNow}
@@ -644,7 +644,7 @@ export default function WritePage() {
           className={`rounded-full px-4 py-1.5 text-[14px] font-medium transition-colors ${
             hasContent
               ? "bg-[#1a8917] text-white hover:bg-[#157012]"
-              : "bg-transparent text-[#6b6b6b]"
+              : "bg-transparent text-surface-muted"
           } ${publish.status === "working" ? "opacity-60" : ""}`}
         >
           {publish.status === "working" ? "Publishing..." : "Publish"}
@@ -659,7 +659,7 @@ export default function WritePage() {
           </div>
         ) : null}
         {publish.status === "working" ? (
-          <div className="mb-6 text-[13px] text-[#6b6b6b]">
+          <div className="mb-6 text-[13px] text-surface-muted">
             {publish.message}
           </div>
         ) : null}
@@ -683,12 +683,12 @@ export default function WritePage() {
           rows={1}
           placeholder="Title"
           spellCheck
-          className="w-full resize-none overflow-hidden bg-transparent text-[32px] font-bold leading-[1.15] tracking-tight text-[#242424] outline-none placeholder:text-[#b3b3b3] md:text-[42px]"
+          className="w-full resize-none overflow-hidden bg-transparent text-[32px] font-bold leading-[1.15] tracking-tight text-surface-text outline-none placeholder:text-surface-faint md:text-[42px]"
         />
 
         {/* Type-specific frontmatter fields, above the body. */}
         {contentType === "review" ? (
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-4 border-y border-black/10 py-4">
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-4 border-y border-line py-4">
             <FieldInput
               label="Film"
               value={fields.film}
@@ -719,7 +719,7 @@ export default function WritePage() {
         ) : null}
 
         {contentType === "trek" ? (
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-4 border-y border-black/10 py-4">
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-4 border-y border-line py-4">
             <FieldInput
               label="Region"
               value={fields.region}
@@ -786,7 +786,7 @@ export default function WritePage() {
           >
             <span className="italic">i</span>
           </BubbleButton>
-          <span className="mx-1 h-4 w-px bg-white/25" />
+          <span className="mx-1 h-4 w-px bg-surface-2/25" />
           <BubbleButton
             active={editor.isActive("heading", { level: 2 })}
             onClick={() =>
@@ -812,7 +812,7 @@ export default function WritePage() {
           >
             &#8220;
           </BubbleButton>
-          <span className="mx-1 h-4 w-px bg-white/25" />
+          <span className="mx-1 h-4 w-px bg-surface-2/25" />
           <BubbleButton
             active={editor.isActive("link")}
             onClick={promptForLink}
@@ -833,7 +833,7 @@ export default function WritePage() {
           }}
           style={{ top: plusPos.top, left: plusPos.left }}
           aria-label="Add image"
-          className="fixed z-40 flex h-8 w-8 items-center justify-center rounded-full border border-black/20 text-[20px] leading-none text-[#6b6b6b] hover:border-black/50 hover:text-black"
+          className="fixed z-40 flex h-8 w-8 items-center justify-center rounded-full border border-line text-[20px] leading-none text-surface-muted hover:border-line hover:text-surface-text"
         >
           +
         </button>
@@ -854,9 +854,9 @@ export default function WritePage() {
       {/* Token modal. */}
       {showTokenModal ? (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 px-5">
-          <div className="w-full max-w-[460px] rounded-xl bg-white p-6 text-[#242424] shadow-xl">
+          <div className="w-full max-w-[460px] rounded-xl bg-surface-2 p-6 text-surface-text shadow-xl">
             <h2 className="text-[20px] font-bold">GitHub token</h2>
-            <p className="mt-2 text-[14px] leading-relaxed text-[#6b6b6b]">
+            <p className="mt-2 text-[14px] leading-relaxed text-surface-muted">
               Paste a GitHub fine-grained personal access token with
               read/write access to the repository contents. The token stays in
               this browser (localStorage) and is never committed or sent
@@ -867,13 +867,13 @@ export default function WritePage() {
               value={tokenInput}
               onChange={(e) => setTokenInput(e.target.value)}
               placeholder="github_pat_..."
-              className="mt-4 w-full rounded-md border border-black/15 px-3 py-2 text-[14px] outline-none focus:border-black/40"
+              className="mt-4 w-full rounded-md border border-line px-3 py-2 text-[14px] outline-none focus:border-surface-faint"
             />
             <div className="mt-5 flex justify-end gap-2">
               <button
                 type="button"
                 onClick={cancelToken}
-                className="rounded-full px-4 py-1.5 text-[14px] text-[#6b6b6b] hover:bg-black/5"
+                className="rounded-full px-4 py-1.5 text-[14px] text-surface-muted hover:bg-black/5"
               >
                 Cancel
               </button>
@@ -916,7 +916,7 @@ function FieldInput({
 }) {
   return (
     <label className={`flex flex-col gap-1 ${className}`}>
-      <span className="text-[11px] uppercase tracking-[0.08em] text-[#8b8b8b]">
+      <span className="text-[11px] uppercase tracking-[0.08em] text-surface-faint">
         {label}
       </span>
       <input
@@ -928,7 +928,7 @@ function FieldInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full border-b border-black/15 bg-transparent pb-1 text-[15px] text-[#242424] outline-none placeholder:text-[#b3b3b3] focus:border-black/40"
+        className="w-full border-b border-line bg-transparent pb-1 text-[15px] text-surface-text outline-none placeholder:text-surface-faint focus:border-surface-faint"
       />
     </label>
   );
@@ -949,13 +949,13 @@ function FieldSelect({
 }) {
   return (
     <label className={`flex flex-col gap-1 ${className}`}>
-      <span className="text-[11px] uppercase tracking-[0.08em] text-[#8b8b8b]">
+      <span className="text-[11px] uppercase tracking-[0.08em] text-surface-faint">
         {label}
       </span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full border-b border-black/15 bg-transparent pb-1 text-[15px] text-[#242424] outline-none focus:border-black/40"
+        className="w-full border-b border-line bg-transparent pb-1 text-[15px] text-surface-text outline-none focus:border-surface-faint"
       >
         {options.map((opt) => (
           <option key={opt} value={opt}>

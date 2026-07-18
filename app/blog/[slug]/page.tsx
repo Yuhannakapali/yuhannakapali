@@ -39,7 +39,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   if (!post) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-white text-[#242424]">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-surface-2 text-surface-text">
         <h1 className="mb-4 text-4xl font-bold">Post Not Found</h1>
         <Link href="/blog" className="underline">
           Back to the blog

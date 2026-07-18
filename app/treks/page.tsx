@@ -13,18 +13,18 @@ export default function TreksIndexPage() {
   const treks = getAllTreks();
 
   return (
-    <div className="flex min-h-screen flex-col bg-white text-[#242424]">
+    <div className="flex min-h-screen flex-col bg-surface-2 text-surface-text">
       <Navbar />
       <main className="mx-auto w-full max-w-[680px] grow px-5 pt-28 pb-24">
         <h1 className="font-display mb-3 text-[34px] font-semibold tracking-tight">
           Treks
         </h1>
-        <p className="mb-10 text-[16px] text-[#6b6b6b]">
+        <p className="mb-10 text-[16px] text-surface-muted">
           Field guides to trails in the Nepal Himalaya.
         </p>
 
         {treks.length === 0 ? (
-          <p className="text-[#6b6b6b]">No guides yet. Check back soon.</p>
+          <p className="text-surface-muted">No guides yet. Check back soon.</p>
         ) : (
           <div className="flex flex-col">
             {treks.map((trek) => {
@@ -45,7 +45,7 @@ export default function TreksIndexPage() {
                       <h2 className="text-[20px] font-bold leading-snug tracking-tight group-hover:text-marigold">
                         {trek.title}
                       </h2>
-                      <p className="mt-2 text-[15px] text-[#6b6b6b]">
+                      <p className="mt-2 text-[15px] text-surface-muted">
                         {stats.join("  ·  ")}
                       </p>
                     </div>

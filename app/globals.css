@@ -3,13 +3,26 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Trailhead design tokens. Used everywhere via bg-ink, text-marigold, etc. */
+/* Trailhead design tokens. Used everywhere via bg-ink, text-marigold, etc.
+   ink / snow / haze / marigold are fixed in both themes (the hero and footer
+   are dark in light and dark mode alike). The surface / line / code tokens are
+   theme-aware and flipped under .dark below. */
 @theme {
   --color-ink: #101a26;
   --color-snow: #f7f8f6;
   --color-haze: #8fa3b0;
   --color-marigold: #e8a13d;
   --color-graphite: #242424;
+
+  /* Theme-aware surfaces (light values; dark overrides in the .dark block). */
+  --color-surface: #f7f8f6; /* page background */
+  --color-surface-2: #ffffff; /* reading pane: articles, lists, cards */
+  --color-surface-text: #242424; /* primary body text */
+  --color-surface-muted: #6b6b6b; /* secondary text */
+  --color-surface-faint: #8b8b8b; /* meta text */
+  --color-line: rgba(0, 0, 0, 0.1); /* hairline rules */
+  --color-line-strong: #242424; /* blockquote border, etc. */
+  --color-code: #f2f2f2; /* inline + block code background */
 
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
     monospace;
@@ -20,8 +33,22 @@
   --font-display: var(--font-fraunces);
 }
 
+/* Dark theme: flip the theme-aware surfaces. next-themes sets .dark on <html>. */
+.dark {
+  --color-surface: #0c1621;
+  --color-surface-2: #0f1b27;
+  --color-surface-text: #e9edf0;
+  --color-surface-muted: #9fb0bb;
+  --color-surface-faint: #7f909c;
+  --color-line: rgba(255, 255, 255, 0.12);
+  --color-line-strong: #e9edf0;
+  --color-code: #1a2836;
+}
+
 body {
   font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-surface-text);
 }
 
 /* Display face with optical sizing for the site name and headings. */
@@ -58,22 +85,6 @@ body {
   }
 }
 
-/* One-shot landing hero intro: text rises and fades in. */
-@media (prefers-reduced-motion: no-preference) {
-  .hero-rise {
-    opacity: 0;
-    transform: translateY(16px);
-    animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-}
-
-@keyframes hero-rise {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Medium-style pale green selection highlight for the writing editor. */
 .editor-surface ::selection {
   background: rgba(180, 215, 190, 0.6);
@@ -86,7 +97,7 @@ body {
   float: left;
   height: 0;
   pointer-events: none;
-  color: #b3b3b3;
+  color: var(--color-surface-faint);
 }
 
 .editor-surface .tiptap:focus {
@@ -95,10 +106,10 @@ body {
 
 /* Article/editor body element styles that are awkward to express per-node. */
 .editor-surface .tiptap blockquote {
-  border-left: 3px solid #000;
+  border-left: 3px solid var(--color-line-strong);
   padding-left: 1.25rem;
   font-style: italic;
-  color: #6b6b6b;
+  color: var(--color-surface-muted);
   font-size: 24px;
   margin: 1.5rem 0;
 }
@@ -141,7 +152,7 @@ body {
 }
 
 .editor-surface .tiptap pre {
-  background: #f2f2f2;
+  background: var(--color-code);
   border-radius: 0.5rem;
   padding: 16px;
   font-size: 14px;
@@ -151,7 +162,7 @@ body {
 }
 
 .editor-surface .tiptap code {
-  background: #f2f2f2;
+  background: var(--color-code);
   border-radius: 4px;
   padding: 0.1em 0.3em;
   font-size: 0.85em;

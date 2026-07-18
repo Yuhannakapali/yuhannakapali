@@ -40,7 +40,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
 
   if (!review) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-white text-[#242424]">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-surface-2 text-surface-text">
         <h1 className="mb-4 text-4xl font-bold">Review Not Found</h1>
         <Link href="/reviews" className="underline">
           Back to reviews
@@ -58,8 +58,8 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
       backHref="/reviews"
       backLabel="Back to all reviews"
       meta={
-        <div className="flex flex-wrap items-center gap-3 text-[15px] text-[#6b6b6b]">
-          <span className="text-[#242424]">
+        <div className="flex flex-wrap items-center gap-3 text-[15px] text-surface-muted">
+          <span className="text-surface-text">
             {review.film}
             {review.year ? ` (${review.year})` : ""}
           </span>

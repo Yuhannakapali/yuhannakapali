@@ -39,7 +39,7 @@ export default async function TrekPage({ params }: TrekPageProps) {
 
   if (!trek) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-white text-[#242424]">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-surface-2 text-surface-text">
         <h1 className="mb-4 text-4xl font-bold">Trek Not Found</h1>
         <Link href="/treks" className="underline">
           Back to treks
@@ -70,16 +70,16 @@ export default async function TrekPage({ params }: TrekPageProps) {
       backHref="/treks"
       backLabel="Back to all guides"
       meta={
-        <dl className="flex flex-wrap items-stretch gap-x-5 gap-y-3 border-y border-[#e6e6e6] py-4">
+        <dl className="flex flex-wrap items-stretch gap-x-5 gap-y-3 border-y border-line py-4">
           {stats.map((s, i) => (
             <div
               key={s.label}
-              className={i > 0 ? "border-l border-[#e6e6e6] pl-5" : ""}
+              className={i > 0 ? "border-l border-line pl-5" : ""}
             >
-              <dt className="text-[11px] uppercase tracking-[0.08em] text-[#8b8b8b]">
+              <dt className="text-[11px] uppercase tracking-[0.08em] text-surface-faint">
                 {s.label}
               </dt>
-              <dd className="mt-0.5 text-[15px] text-[#242424]">{s.value}</dd>
+              <dd className="mt-0.5 text-[15px] text-surface-text">{s.value}</dd>
             </div>
           ))}
         </dl>
