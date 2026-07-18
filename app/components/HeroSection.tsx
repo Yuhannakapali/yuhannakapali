@@ -1,32 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ContourLines } from "./ContourLines";
 import { Ridgeline } from "./Ridgeline";
 
-const heroContainer: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
-};
-
-const heroItem: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
-// Landing hero: ink background, contour motif and interactive ridgeline behind
-// the name. The contour and ridge layers drift by different amounts on pointer
-// move for a subtle two-layer parallax (off on touch and reduced motion).
+// Landing hero. The entrance runs in pure CSS (see .hero-rise) so the heading,
+// which is the LCP element, paints immediately without waiting for JS. The
+// contour and ridge layers drift by different amounts on pointer move for a
+// subtle two-layer parallax (off on touch and reduced motion).
 export function HeroSection() {
   const contourRef = useRef<HTMLDivElement>(null);
   const ridgeRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -36,18 +21,23 @@ export function HeroSection() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (!fine.matches || reduced.matches) return;
 
+    // Cache the section rect and refresh it only on resize/scroll, so the
+    // per-frame pointer handler never forces a synchronous reflow.
+    let rect = section.getBoundingClientRect();
+    const measure = () => {
+      rect = section.getBoundingClientRect();
+    };
+
     let targetX = 0;
     let curContour = 0;
     let curRidge = 0;
     let raf = 0;
 
     const onMove = (e: PointerEvent) => {
-      const rect = section.getBoundingClientRect();
       targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 2; // -1..1
     };
 
     const tick = () => {
-      // Contour drifts more than the ridge (ridge is the slower, deeper layer).
       curContour += (targetX * 14 - curContour) * 0.06;
       curRidge += (targetX * 7 - curRidge) * 0.06;
       if (contourRef.current) {
@@ -60,10 +50,14 @@ export function HeroSection() {
     };
 
     section.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("resize", measure);
+    window.addEventListener("scroll", measure, { passive: true });
     raf = requestAnimationFrame(tick);
     return () => {
       cancelAnimationFrame(raf);
       section.removeEventListener("pointermove", onMove);
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("scroll", measure);
     };
   }, []);
 
@@ -80,56 +74,43 @@ export function HeroSection() {
       </div>
 
       {/* Hero text. pointer-events-none so it never covers the ridgeline dots
-          below it; the text itself is not interactive. Motion orchestrates a
-          staggered entrance on load. */}
-      <motion.div
-        className="pointer-events-none relative z-10 flex flex-1 flex-col items-center justify-center px-5 text-center"
-        variants={heroContainer}
-        initial={reduce ? false : "hidden"}
-        animate="show"
-      >
-        <motion.p
-          variants={heroItem}
-          className="font-sans text-[13px] uppercase tracking-[0.2em] text-marigold"
+          below it; the text itself is not interactive. */}
+      <div className="pointer-events-none relative z-10 flex flex-1 flex-col items-center justify-center px-5 text-center">
+        <p
+          className="hero-rise font-sans text-[13px] uppercase tracking-[0.2em] text-marigold"
+          style={{ animationDelay: "0.05s" }}
         >
           Kathmandu, Nepal
-        </motion.p>
-        <motion.h1
-          variants={heroItem}
-          className="font-display mt-4 text-[40px] font-semibold leading-[1.05] tracking-tight text-snow md:text-[72px]"
+        </p>
+        <h1
+          className="hero-rise font-display mt-4 text-[40px] font-semibold leading-[1.05] tracking-tight text-snow md:text-[72px]"
+          style={{ animationDelay: "0.15s" }}
         >
           Yuhanna Kapali
-        </motion.h1>
-        <motion.p
-          variants={heroItem}
-          className="mt-5 max-w-[34rem] font-sans text-[16px] leading-relaxed text-haze md:text-[18px]"
+        </h1>
+        <p
+          className="hero-rise mt-5 max-w-[34rem] font-sans text-[16px] leading-relaxed text-haze md:text-[18px]"
+          style={{ animationDelay: "0.28s" }}
         >
           Software engineer. I write about building things, the films I watch,
           and the trails above Kathmandu.
-        </motion.p>
-      </motion.div>
+        </p>
+      </div>
 
       {/* Quiet scroll hint */}
-      <motion.div
-        className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex justify-center"
-        initial={reduce ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: reduce ? 0 : 0.9, duration: 0.6 }}
+      <div
+        className="hero-rise pointer-events-none absolute inset-x-0 bottom-6 z-20 flex justify-center"
+        style={{ animationDelay: "0.5s" }}
       >
         <span className="flex flex-col items-center gap-1 text-[11px] uppercase tracking-[0.2em] text-haze">
           Scroll
-          <motion.svg
+          <svg
+            className="scroll-bob"
             width="14"
             height="14"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
-            animate={reduce ? undefined : { y: [0, 3, 0] }}
-            transition={
-              reduce
-                ? undefined
-                : { duration: 1.8, repeat: Infinity, ease: "easeInOut" }
-            }
           >
             <path
               d="M6 9l6 6 6-6"
@@ -138,9 +119,9 @@ export function HeroSection() {
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-          </motion.svg>
+          </svg>
         </span>
-      </motion.div>
+      </div>
     </section>
   );
 }

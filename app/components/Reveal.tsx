@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { m, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
 // Shared easing and viewport config so every reveal feels like one system.
@@ -26,7 +26,7 @@ export function Reveal({
   if (reduce) return <div className={className}>{children}</div>;
 
   return (
-    <motion.div
+    <m.div
       className={className}
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ export function Reveal({
       transition={{ duration: 0.6, ease: EASE, delay: delay / 1000 }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -55,7 +55,7 @@ export function Stagger({
   if (reduce) return <div className={className}>{children}</div>;
 
   return (
-    <motion.div
+    <m.div
       className={className}
       initial="hidden"
       whileInView="show"
@@ -66,7 +66,7 @@ export function Stagger({
       }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -81,8 +81,8 @@ export function StaggerItem({
   if (reduce) return <div className={className}>{children}</div>;
 
   return (
-    <motion.div className={className} variants={itemVariants}>
+    <m.div className={className} variants={itemVariants}>
       {children}
-    </motion.div>
+    </m.div>
   );
 }

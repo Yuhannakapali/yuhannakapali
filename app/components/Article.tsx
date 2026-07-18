@@ -91,7 +91,13 @@ const components: Components = {
     if (typeof src !== "string") return null;
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={src} alt={alt ?? ""} className="mx-auto my-8 w-full rounded" />
+      <img
+        src={src}
+        alt={alt ?? ""}
+        loading="lazy"
+        decoding="async"
+        className="mx-auto my-8 h-auto w-full rounded"
+      />
     );
   },
   pre({ children }) {
@@ -124,6 +130,8 @@ export function Article({
   date,
   content,
   cover,
+  coverWidth,
+  coverHeight,
   meta,
   backHref,
   backLabel,
@@ -132,6 +140,8 @@ export function Article({
   date: string;
   content: string;
   cover?: string;
+  coverWidth?: number | null;
+  coverHeight?: number | null;
   /** Optional block rendered directly under the byline (film/rating, stats). */
   meta?: ReactNode;
   backHref: string;
@@ -166,8 +176,14 @@ export function Article({
             <img
               src={cover}
               alt=""
-              className="mt-10 w-full rounded object-cover"
-              loading="lazy"
+              {...(coverWidth && coverHeight
+                ? { width: coverWidth, height: coverHeight }
+                : {})}
+              // Cover is the likely LCP element, so load it eagerly.
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="mt-10 h-auto w-full rounded object-cover"
             />
           ) : null}
 

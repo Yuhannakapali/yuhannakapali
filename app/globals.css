@@ -85,6 +85,37 @@ body {
   }
 }
 
+/* Hero entrance runs in pure CSS so the above-the-fold heading (the LCP
+   element) paints immediately without waiting for JavaScript to hydrate. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-rise {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: hero-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .scroll-bob {
+    animation: scroll-bob 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes hero-rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes scroll-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
 /* Medium-style pale green selection highlight for the writing editor. */
 .editor-surface ::selection {
   background: rgba(180, 215, 190, 0.6);

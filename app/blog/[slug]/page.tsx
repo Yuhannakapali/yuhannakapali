@@ -95,6 +95,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         date={post.date}
         content={post.content}
         cover={post.cover}
+        coverWidth={post.coverWidth}
+        coverHeight={post.coverHeight}
         backHref="/blog"
         backLabel="Back to all posts"
       />

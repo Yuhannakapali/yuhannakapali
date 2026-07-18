@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { getImageSize } from "./image-size";
 
 export type PostMeta = {
   slug: string;
@@ -8,6 +9,8 @@ export type PostMeta = {
   date: string;
   description: string;
   cover: string;
+  coverWidth: number | null;
+  coverHeight: number | null;
 };
 
 export type Post = PostMeta & {
@@ -26,6 +29,9 @@ function readSlug(slug: string): Post | null {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
+  const cover = typeof data.cover === "string" ? data.cover : "";
+  const size = cover ? getImageSize(cover) : null;
+
   return {
     slug,
     title: typeof data.title === "string" ? data.title : slug,
@@ -35,7 +41,9 @@ function readSlug(slug: string): Post | null {
         ? data.date.toISOString()
         : String(data.date ?? ""),
     description: typeof data.description === "string" ? data.description : "",
-    cover: typeof data.cover === "string" ? data.cover : "",
+    cover,
+    coverWidth: size?.width ?? null,
+    coverHeight: size?.height ?? null,
     content,
   };
 }

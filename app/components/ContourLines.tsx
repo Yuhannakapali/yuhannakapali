@@ -68,9 +68,13 @@ function closedPath(pts: Pt[]): string {
 export function ContourLines({
   className = "",
   interactive = true,
+  draw = true,
 }: {
   className?: string;
   interactive?: boolean;
+  /** Animate the lines drawing themselves in on load. Off = static (no
+   *  non-composited stroke-dashoffset animation), used for the faint footer. */
+  draw?: boolean;
 }) {
   const contours = useMemo(() => buildContours(), []);
   const initialPaths = useMemo(
@@ -95,16 +99,18 @@ export function ContourLines({
     let pointer: Pt | null = null;
     let raf = 0;
 
-    const toViewBox = (clientX: number, clientY: number): Pt => {
-      const rect = svg.getBoundingClientRect();
-      return {
-        x: ((clientX - rect.left) / rect.width) * VIEW_W,
-        y: ((clientY - rect.top) / rect.height) * VIEW_H,
-      };
+    // Cache the rect and refresh only on resize/scroll so the per-frame pointer
+    // handler never triggers a synchronous layout (forced reflow).
+    let rect = svg.getBoundingClientRect();
+    const measure = () => {
+      rect = svg.getBoundingClientRect();
     };
 
     const onMove = (e: PointerEvent) => {
-      pointer = toViewBox(e.clientX, e.clientY);
+      pointer = {
+        x: ((e.clientX - rect.left) / rect.width) * VIEW_W,
+        y: ((e.clientY - rect.top) / rect.height) * VIEW_H,
+      };
     };
     const onLeave = () => {
       pointer = null;
@@ -149,12 +155,16 @@ export function ContourLines({
 
     window.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("pointerleave", onLeave);
+    window.addEventListener("resize", measure);
+    window.addEventListener("scroll", measure, { passive: true });
     raf = requestAnimationFrame(tick);
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("scroll", measure);
     };
   }, [contours, interactive]);
 
@@ -173,7 +183,7 @@ export function ContourLines({
           ref={(el) => {
             pathRefs.current[i] = el;
           }}
-          className="contour-path"
+          className={draw ? "contour-path" : undefined}
           d={d}
           fill="none"
           stroke="var(--color-haze)"
@@ -181,7 +191,7 @@ export function ContourLines({
           strokeOpacity={0.16 + (i / CONTOURS) * 0.16}
           vectorEffect="non-scaling-stroke"
           pathLength={1}
-          style={{ animationDelay: `${i * 0.12}s` }}
+          style={draw ? { animationDelay: `${i * 0.12}s` } : undefined}
         />
       ))}
     </svg>

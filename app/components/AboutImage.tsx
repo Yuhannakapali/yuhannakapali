@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import {
-  motion,
+  m,
   useReducedMotion,
   useScroll,
   useSpring,
@@ -32,10 +32,11 @@ export function AboutImage({ src, alt }: { src: string; alt: string }) {
       ref={ref}
       className="aspect-[16/10] w-full overflow-hidden rounded-2xl"
     >
-      <motion.img
+      <m.img
         src={src}
         alt={alt}
         loading="lazy"
+        decoding="async"
         style={reduce ? undefined : { scale }}
         className="h-full w-full object-cover"
       />

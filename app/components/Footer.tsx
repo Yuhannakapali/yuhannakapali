@@ -10,6 +10,7 @@ export function Footer() {
       {/* The contour motif, very faintly, static. */}
       <ContourLines
         interactive={false}
+        draw={false}
         className="pointer-events-none absolute inset-0 h-full w-full opacity-40"
       />
 
