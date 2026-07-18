@@ -18,9 +18,8 @@ export const SOCIAL_LINKS = [
 ] as const;
 
 export const NAV_LINKS = [
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Experience", href: "#experience" },
-  { name: "Contact", href: "#contact" },
+  { name: "Writing", href: "/blog" },
+  { name: "Film", href: "/reviews" },
+  { name: "Treks", href: "/treks" },
+  { name: "About", href: "/#about" },
 ] as const;

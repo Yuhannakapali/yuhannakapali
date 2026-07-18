@@ -1,12 +1,187 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Trailhead design tokens. Used everywhere via bg-ink, text-marigold, etc.
+   ink / snow / haze / marigold are fixed in both themes (the hero and footer
+   are dark in light and dark mode alike). The surface / line / code tokens are
+   theme-aware and flipped under .dark below. */
+@theme {
+  --color-ink: #101a26;
+  --color-snow: #f7f8f6;
+  --color-haze: #8fa3b0;
+  --color-marigold: #e8a13d;
+  --color-graphite: #242424;
+
+  /* Theme-aware surfaces (light values; dark overrides in the .dark block). */
+  --color-surface: #f7f8f6; /* page background */
+  --color-surface-2: #ffffff; /* reading pane: articles, lists, cards */
+  --color-surface-text: #242424; /* primary body text */
+  --color-surface-muted: #6b6b6b; /* secondary text */
+  --color-surface-faint: #8b8b8b; /* meta text */
+  --color-line: rgba(0, 0, 0, 0.1); /* hairline rules */
+  --color-line-strong: #242424; /* blockquote border, etc. */
+  --color-code: #f2f2f2; /* inline + block code background */
+
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    monospace;
+}
+
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-fraunces);
+}
+
+/* Dark theme: flip the theme-aware surfaces. next-themes sets .dark on <html>. */
+.dark {
+  --color-surface: #0c1621;
+  --color-surface-2: #0f1b27;
+  --color-surface-text: #e9edf0;
+  --color-surface-muted: #9fb0bb;
+  --color-surface-faint: #7f909c;
+  --color-line: rgba(255, 255, 255, 0.12);
+  --color-line-strong: #e9edf0;
+  --color-code: #1a2836;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-surface-text);
+}
+
+/* Display face with optical sizing for the site name and headings. */
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+/* Visible keyboard focus everywhere, in the accent color. */
+:focus-visible {
+  outline: 2px solid var(--color-marigold);
+  outline-offset: 2px;
+}
+
+/* Serif reading font used by published articles and the /write editor,
+   so drafting looks identical to the final post. */
+.font-article {
+  font-family: Charter, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+/* Contour lines draw themselves in on load. With reduced motion the paths are
+   simply rendered fully (default dashoffset 0), never animated. */
+@media (prefers-reduced-motion: no-preference) {
+  .contour-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: contour-draw 2s ease both;
+  }
+}
+
+@keyframes contour-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Medium-style pale green selection highlight for the writing editor. */
+.editor-surface ::selection {
+  background: rgba(180, 215, 190, 0.6);
+}
+
+/* Tiptap placeholders: only the empty first line shows "Tell your story..." */
+.editor-surface .tiptap p.is-editor-empty:first-child::before,
+.editor-surface .tiptap h1.is-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  color: var(--color-surface-faint);
+}
+
+.editor-surface .tiptap:focus {
+  outline: none;
+}
+
+/* Article/editor body element styles that are awkward to express per-node. */
+.editor-surface .tiptap blockquote {
+  border-left: 3px solid var(--color-line-strong);
+  padding-left: 1.25rem;
+  font-style: italic;
+  color: var(--color-surface-muted);
+  font-size: 24px;
+  margin: 1.5rem 0;
+}
+
+.editor-surface .tiptap h2 {
+  font-family: var(--font-inter), Arial, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  margin-top: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.editor-surface .tiptap h3 {
+  font-family: var(--font-inter), Arial, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.editor-surface .tiptap p {
+  margin-top: 2em;
+}
+
+.editor-surface .tiptap p:first-child {
+  margin-top: 0;
+}
+
+.editor-surface .tiptap ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-top: 2em;
+}
+
+.editor-surface .tiptap ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin-top: 2em;
+}
+
+.editor-surface .tiptap pre {
+  background: var(--color-code);
+  border-radius: 0.5rem;
+  padding: 16px;
+  font-size: 14px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.editor-surface .tiptap code {
+  background: var(--color-code);
+  border-radius: 4px;
+  padding: 0.1em 0.3em;
+  font-size: 0.85em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.editor-surface .tiptap pre code {
+  background: none;
+  padding: 0;
+  font-size: 14px;
+}
+
+.editor-surface .tiptap a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.editor-surface .tiptap img {
+  width: 100%;
+  border-radius: 4px;
+  margin: 2rem 0;
 }

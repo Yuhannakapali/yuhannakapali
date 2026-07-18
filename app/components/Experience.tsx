@@ -1,8 +1,8 @@
-"use client";
-import { motion } from "framer-motion";
-import { Calendar } from "lucide-react";
+import { Reveal } from "./Reveal";
 
-const experiences = [
+// Timeline in the Trailhead design language: a thin vertical rule with marigold
+// nodes, Fraunces roles, quiet Inter details. Entries reveal on scroll.
+const EXPERIENCES = [
   {
     company: "GoGroup",
     role: "Senior Software Engineer",
@@ -50,66 +50,43 @@ const experiences = [
 
 export function Experience() {
   return (
-    <section
-      id="experience"
-      className="py-20 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white"
-    >
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center">
-            <span className="text-cyan-600 dark:text-cyan-400 font-mono mr-2">
-              04.
-            </span>{" "}
-            Where I've Worked
-            <span className="ml-4 h-px bg-slate-300 dark:bg-slate-700 flex-grow max-w-xs"></span>
-          </h2>
-        </motion.div>
+    <section id="experience" className="scroll-mt-20 border-t border-line">
+      <div className="mx-auto max-w-3xl px-5 py-16 md:py-24">
+        <h2 className="font-display text-[28px] font-semibold tracking-tight md:text-[32px]">
+          Where I have worked
+        </h2>
 
-        <div className="relative border-l border-slate-300 dark:border-slate-700 ml-3 md:ml-6 space-y-12">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.company}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative pl-8 md:pl-12"
-            >
-              <div className="absolute -left-1.5 top-2 w-3 h-3 rounded-full bg-cyan-500 border border-slate-50 dark:border-slate-900 shadow-[0_0_0_4px_rgba(248,250,252,1)] dark:shadow-[0_0_0_4px_rgba(15,23,42,1)]"></div>
+        <div className="relative mt-12 ml-2 space-y-12 border-l border-line">
+          {EXPERIENCES.map((exp, idx) => (
+            <Reveal key={exp.company} className="relative pl-8" delay={idx * 80}>
+              {/* Marigold timeline node */}
+              <span
+                aria-hidden="true"
+                className="absolute -left-[6.5px] top-[6px] h-3 w-3 rounded-full bg-marigold ring-4 ring-surface"
+              />
 
-              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                  {exp.role}{" "}
-                  <span className="text-cyan-600 dark:text-cyan-400">
-                    @ {exp.company}
-                  </span>
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                <h3 className="font-display text-[19px] font-semibold tracking-tight text-surface-text">
+                  {exp.role}
+                  <span className="text-marigold"> · {exp.company}</span>
                 </h3>
-                <span className="text-sm font-mono text-slate-500 dark:text-slate-400 flex items-center mt-1 sm:mt-0">
-                  <Calendar size={14} className="mr-2" />
-                  {exp.period}
-                </span>
+                <span className="text-[13px] text-surface-faint">{exp.period}</span>
               </div>
 
-              <ul className="space-y-2 mt-4">
+              <ul className="mt-4 space-y-2">
                 {exp.description.map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-start text-slate-600 dark:text-slate-400 text-base"
+                    className="flex gap-2 text-[15px] leading-relaxed text-surface-muted"
                   >
-                    <span className="text-cyan-600 dark:text-cyan-500 mr-2 mt-1.5">
-                      ▹
+                    <span aria-hidden="true" className="mt-[3px] text-marigold">
+                      &#8250;
                     </span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
       </div>
