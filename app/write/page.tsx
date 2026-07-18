@@ -15,11 +15,46 @@ const REPO = "Yuhannakapali/yuhannakapali";
 const BRANCH = "main";
 const API_BASE = `https://api.github.com/repos/${REPO}/contents`;
 
+type ContentType = "post" | "review" | "trek";
+
+const CONTENT_META: Record<
+  ContentType,
+  { label: string; folder: string; hrefBase: string }
+> = {
+  post: { label: "Post", folder: "posts", hrefBase: "/blog" },
+  review: { label: "Review", folder: "reviews", hrefBase: "/reviews" },
+  trek: { label: "Trek", folder: "treks", hrefBase: "/treks" },
+};
+
+const DIFFICULTIES = ["Easy", "Moderate", "Hard", "Strenuous"];
+
+type ExtraFields = {
+  film: string;
+  year: string;
+  rating: string;
+  region: string;
+  days: string;
+  difficulty: string;
+  best_season: string;
+  max_altitude: string;
+};
+
+const EMPTY_FIELDS: ExtraFields = {
+  film: "",
+  year: "",
+  rating: "",
+  region: "",
+  days: "",
+  difficulty: "Moderate",
+  best_season: "",
+  max_altitude: "",
+};
+
 type PublishState =
   | { status: "idle" }
   | { status: "working"; message: string }
   | { status: "error"; message: string }
-  | { status: "done"; slug: string };
+  | { status: "done"; href: string };
 
 function slugify(title: string): string {
   return title
@@ -51,8 +86,17 @@ function yamlString(value: string): string {
   return JSON.stringify(value);
 }
 
+function toNumber(value: string): number | null {
+  const trimmed = value.trim();
+  if (trimmed === "") return null;
+  const n = Number(trimmed);
+  return Number.isNaN(n) ? null : n;
+}
+
 export default function WritePage() {
   const [title, setTitle] = useState("");
+  const [contentType, setContentType] = useState<ContentType>("post");
+  const [fields, setFields] = useState<ExtraFields>(EMPTY_FIELDS);
   const [publish, setPublish] = useState<PublishState>({ status: "idle" });
   const [draftSaved, setDraftSaved] = useState(false);
   const [showTokenModal, setShowTokenModal] = useState(false);
@@ -139,6 +183,12 @@ export default function WritePage() {
   const editorRef = useRef<typeof editor>(null);
   editorRef.current = editor;
 
+  // Refs mirror state so the debounced saver reads current values, not stale ones.
+  const typeRef = useRef(contentType);
+  typeRef.current = contentType;
+  const fieldsRef = useRef(fields);
+  fieldsRef.current = fields;
+
   const scheduleDraftSave = useCallback(
     (nextTitle: string) => {
       if (saveTimer.current) clearTimeout(saveTimer.current);
@@ -146,7 +196,12 @@ export default function WritePage() {
         const html = editorRef.current?.getHTML() ?? "";
         localStorage.setItem(
           DRAFT_KEY,
-          JSON.stringify({ title: nextTitle, html }),
+          JSON.stringify({
+            type: typeRef.current,
+            title: nextTitle,
+            html,
+            fields: fieldsRef.current,
+          }),
         );
         setDraftSaved(true);
         if (savedTimer.current) clearTimeout(savedTimer.current);
@@ -156,6 +211,19 @@ export default function WritePage() {
     [],
   );
 
+  // Update one extra field and persist the draft.
+  const updateField = useCallback(
+    (key: keyof ExtraFields, value: string) => {
+      setFields((f) => {
+        const next = { ...f, [key]: value };
+        fieldsRef.current = next;
+        return next;
+      });
+      scheduleDraftSave(titleRef.current?.value ?? "");
+    },
+    [scheduleDraftSave],
+  );
+
   // Restore a saved draft once the editor is ready.
   useEffect(() => {
     if (!editor || restored.current) return;
@@ -163,8 +231,15 @@ export default function WritePage() {
     try {
       const raw = localStorage.getItem(DRAFT_KEY);
       if (raw) {
-        const draft = JSON.parse(raw) as { title?: string; html?: string };
+        const draft = JSON.parse(raw) as {
+          type?: ContentType;
+          title?: string;
+          html?: string;
+          fields?: Partial<ExtraFields>;
+        };
+        if (draft.type) setContentType(draft.type);
         if (draft.title) setTitle(draft.title);
+        if (draft.fields) setFields({ ...EMPTY_FIELDS, ...draft.fields });
         if (draft.html) editor.commands.setContent(draft.html);
       }
     } catch {
@@ -274,7 +349,10 @@ export default function WritePage() {
   function saveDraftNow() {
     setMenuOpen(false);
     const html = editor?.getHTML() ?? "";
-    localStorage.setItem(DRAFT_KEY, JSON.stringify({ title, html }));
+    localStorage.setItem(
+      DRAFT_KEY,
+      JSON.stringify({ type: contentType, title, html, fields }),
+    );
     setDraftSaved(true);
     if (savedTimer.current) clearTimeout(savedTimer.current);
     savedTimer.current = setTimeout(() => setDraftSaved(false), 1500);
@@ -409,9 +487,30 @@ export default function WritePage() {
       const description = firstParagraph.slice(0, 200);
       const date = new Date().toISOString();
 
+      // Type-specific frontmatter fields.
+      const extra: string[] = [];
+      if (contentType === "review") {
+        if (fields.film.trim()) extra.push(`film: ${yamlString(fields.film.trim())}`);
+        const year = toNumber(fields.year);
+        if (year != null) extra.push(`year: ${year}`);
+        const rating = toNumber(fields.rating);
+        if (rating != null) extra.push(`rating: ${rating}`);
+      } else if (contentType === "trek") {
+        if (fields.region.trim()) extra.push(`region: ${yamlString(fields.region.trim())}`);
+        const days = toNumber(fields.days);
+        if (days != null) extra.push(`days: ${days}`);
+        if (fields.difficulty.trim())
+          extra.push(`difficulty: ${yamlString(fields.difficulty.trim())}`);
+        if (fields.best_season.trim())
+          extra.push(`best_season: ${yamlString(fields.best_season.trim())}`);
+        const maxAlt = toNumber(fields.max_altitude);
+        if (maxAlt != null) extra.push(`max_altitude: ${maxAlt}`);
+      }
+
       const frontmatter = [
         "---",
         `title: ${yamlString(trimmedTitle)}`,
+        ...extra,
         `date: ${date}`,
         `description: ${yamlString(description)}`,
         ...(firstImagePath ? [`cover: ${yamlString(firstImagePath)}`] : []),
@@ -421,16 +520,20 @@ export default function WritePage() {
 
       const fileContent = `${frontmatter}\n${markdown.trim()}\n`;
 
-      setPublish({ status: "working", message: "Committing post..." });
+      const meta = CONTENT_META[contentType];
+      setPublish({
+        status: "working",
+        message: `Committing ${meta.label.toLowerCase()}...`,
+      });
       await ghPut(
-        `content/posts/${slug}.md`,
+        `content/${meta.folder}/${slug}.md`,
         utf8ToBase64(fileContent),
-        `Add post: ${trimmedTitle}`,
+        `Add ${meta.label.toLowerCase()}: ${trimmedTitle}`,
         token,
       );
 
       localStorage.removeItem(DRAFT_KEY);
-      setPublish({ status: "done", slug });
+      setPublish({ status: "done", href: `${meta.hrefBase}/${slug}` });
     } catch (err) {
       if (err instanceof Error && err.message === "UNAUTHORIZED") {
         localStorage.removeItem(TOKEN_KEY);
@@ -460,10 +563,10 @@ export default function WritePage() {
             Your site is rebuilding and the post will be live in a few minutes.
           </p>
           <Link
-            href={`/blog/${publish.slug}`}
+            href={publish.href}
             className="mt-6 inline-block text-[16px] text-[#1a8917] underline"
           >
-            View /blog/{publish.slug}
+            View {publish.href}
           </Link>
         </div>
       </div>
@@ -472,8 +575,31 @@ export default function WritePage() {
 
   return (
     <div className="editor-surface min-h-screen bg-white text-[#242424]">
-      {/* Minimal top bar: draft indicator, menu, and Publish only. */}
-      <div className="fixed inset-x-0 top-0 z-50 flex items-center justify-end gap-3 px-5 py-4">
+      {/* Minimal top bar: content-type switcher, draft indicator, menu, Publish. */}
+      <div className="fixed inset-x-0 top-0 z-50 flex items-center justify-between gap-3 px-5 py-4">
+        {/* Content type switcher */}
+        <div className="flex items-center gap-1 rounded-full bg-black/5 p-1 text-[13px]">
+          {(Object.keys(CONTENT_META) as ContentType[]).map((t) => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => {
+                setContentType(t);
+                typeRef.current = t;
+                scheduleDraftSave(titleRef.current?.value ?? "");
+              }}
+              className={`rounded-full px-3 py-1 transition-colors ${
+                contentType === t
+                  ? "bg-white text-[#242424] shadow-sm"
+                  : "text-[#6b6b6b] hover:text-[#242424]"
+              }`}
+            >
+              {CONTENT_META[t].label}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-3">
         <span
           className={`text-[13px] text-[#6b6b6b] transition-opacity duration-500 ${
             draftSaved ? "opacity-100" : "opacity-0"
@@ -523,6 +649,7 @@ export default function WritePage() {
         >
           {publish.status === "working" ? "Publishing..." : "Publish"}
         </button>
+        </div>
       </div>
 
       <div className="mx-auto w-full max-w-[680px] px-5 pt-24 pb-[40vh]">
@@ -559,7 +686,81 @@ export default function WritePage() {
           className="w-full resize-none overflow-hidden bg-transparent text-[32px] font-bold leading-[1.15] tracking-tight text-[#242424] outline-none placeholder:text-[#b3b3b3] md:text-[42px]"
         />
 
-        <div className="mt-4">
+        {/* Type-specific frontmatter fields, above the body. */}
+        {contentType === "review" ? (
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-4 border-y border-black/10 py-4">
+            <FieldInput
+              label="Film"
+              value={fields.film}
+              onChange={(v) => updateField("film", v)}
+              placeholder="Film name"
+              className="min-w-[200px] flex-1"
+            />
+            <FieldInput
+              label="Year"
+              type="number"
+              value={fields.year}
+              onChange={(v) => updateField("year", v)}
+              placeholder="2024"
+              className="w-24"
+            />
+            <FieldInput
+              label="Rating (1 to 5)"
+              type="number"
+              step="0.5"
+              min="1"
+              max="5"
+              value={fields.rating}
+              onChange={(v) => updateField("rating", v)}
+              placeholder="4.5"
+              className="w-28"
+            />
+          </div>
+        ) : null}
+
+        {contentType === "trek" ? (
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-4 border-y border-black/10 py-4">
+            <FieldInput
+              label="Region"
+              value={fields.region}
+              onChange={(v) => updateField("region", v)}
+              placeholder="Langtang"
+              className="min-w-[160px] flex-1"
+            />
+            <FieldInput
+              label="Days"
+              type="number"
+              value={fields.days}
+              onChange={(v) => updateField("days", v)}
+              placeholder="7"
+              className="w-20"
+            />
+            <FieldSelect
+              label="Difficulty"
+              value={fields.difficulty}
+              onChange={(v) => updateField("difficulty", v)}
+              options={DIFFICULTIES}
+              className="w-36"
+            />
+            <FieldInput
+              label="Best season"
+              value={fields.best_season}
+              onChange={(v) => updateField("best_season", v)}
+              placeholder="October to November"
+              className="min-w-[160px] flex-1"
+            />
+            <FieldInput
+              label="Max altitude (m)"
+              type="number"
+              value={fields.max_altitude}
+              onChange={(v) => updateField("max_altitude", v)}
+              placeholder="4984"
+              className="w-32"
+            />
+          </div>
+        ) : null}
+
+        <div className="mt-6">
           <EditorContent editor={editor} />
         </div>
       </div>
@@ -689,6 +890,80 @@ export default function WritePage() {
         </div>
       ) : null}
     </div>
+  );
+}
+
+function FieldInput({
+  label,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+  step,
+  min,
+  max,
+  className = "",
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  type?: string;
+  step?: string;
+  min?: string;
+  max?: string;
+  className?: string;
+}) {
+  return (
+    <label className={`flex flex-col gap-1 ${className}`}>
+      <span className="text-[11px] uppercase tracking-[0.08em] text-[#8b8b8b]">
+        {label}
+      </span>
+      <input
+        type={type}
+        inputMode={type === "number" ? "decimal" : undefined}
+        step={step}
+        min={min}
+        max={max}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full border-b border-black/15 bg-transparent pb-1 text-[15px] text-[#242424] outline-none placeholder:text-[#b3b3b3] focus:border-black/40"
+      />
+    </label>
+  );
+}
+
+function FieldSelect({
+  label,
+  value,
+  onChange,
+  options,
+  className = "",
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: string[];
+  className?: string;
+}) {
+  return (
+    <label className={`flex flex-col gap-1 ${className}`}>
+      <span className="text-[11px] uppercase tracking-[0.08em] text-[#8b8b8b]">
+        {label}
+      </span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full border-b border-black/15 bg-transparent pb-1 text-[15px] text-[#242424] outline-none focus:border-black/40"
+      >
+        {options.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 }
 

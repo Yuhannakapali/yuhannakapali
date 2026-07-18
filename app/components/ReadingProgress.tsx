@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+// Thin marigold progress bar that fills as the reader scrolls the article.
 export function ReadingProgress() {
   const [progress, setProgress] = useState(0);
 
@@ -25,7 +26,7 @@ export function ReadingProgress() {
   return (
     <div className="fixed left-0 top-0 z-[60] h-[2px] w-full bg-transparent">
       <div
-        className="h-full bg-[#242424] transition-[width] duration-75 ease-out"
+        className="h-full bg-marigold transition-[width] duration-75 ease-out"
         style={{ width: `${progress}%` }}
       />
     </div>

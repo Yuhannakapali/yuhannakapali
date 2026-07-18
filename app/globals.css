@@ -3,19 +3,75 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Trailhead design tokens. Used everywhere via bg-ink, text-marigold, etc. */
+@theme {
+  --color-ink: #101a26;
+  --color-snow: #f7f8f6;
+  --color-haze: #8fa3b0;
+  --color-marigold: #e8a13d;
+  --color-graphite: #242424;
+
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    monospace;
+}
+
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-fraunces);
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
+}
+
+/* Display face with optical sizing for the site name and headings. */
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-optical-sizing: auto;
+}
+
+/* Visible keyboard focus everywhere, in the accent color. */
+:focus-visible {
+  outline: 2px solid var(--color-marigold);
+  outline-offset: 2px;
 }
 
 /* Serif reading font used by published articles and the /write editor,
    so drafting looks identical to the final post. */
 .font-article {
   font-family: Charter, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+/* Contour lines draw themselves in on load. With reduced motion the paths are
+   simply rendered fully (default dashoffset 0), never animated. */
+@media (prefers-reduced-motion: no-preference) {
+  .contour-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: contour-draw 2s ease both;
+  }
+}
+
+@keyframes contour-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* One-shot landing hero intro: text rises and fades in. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-rise {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes hero-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Medium-style pale green selection highlight for the writing editor. */
@@ -48,7 +104,7 @@ body {
 }
 
 .editor-surface .tiptap h2 {
-  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-family: var(--font-inter), Arial, sans-serif;
   font-weight: 700;
   font-size: 24px;
   letter-spacing: -0.01em;
@@ -57,7 +113,7 @@ body {
 }
 
 .editor-surface .tiptap h3 {
-  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-family: var(--font-inter), Arial, sans-serif;
   font-weight: 700;
   font-size: 20px;
   margin-top: 1.5rem;
@@ -89,7 +145,7 @@ body {
   border-radius: 0.5rem;
   padding: 16px;
   font-size: 14px;
-  font-family: var(--font-geist-mono), monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   overflow-x: auto;
   margin: 1.5rem 0;
 }
@@ -99,7 +155,7 @@ body {
   border-radius: 4px;
   padding: 0.1em 0.3em;
   font-size: 0.85em;
-  font-family: var(--font-geist-mono), monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 .editor-surface .tiptap pre code {

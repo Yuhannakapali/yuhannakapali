@@ -1,22 +1,28 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import { ThemeProvider } from "./components/ThemeProvider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Display face: tight leading, optical sizing. Only the weights we use.
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// UI and body face.
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Yuhanna Kapali | Backend Developer",
+  metadataBase: new URL("https://yuhannakapali.com.np"),
+  title: "Yuhanna Kapali | Software engineer, Kathmandu",
   description:
-    "Backend-focused Software Engineer with 5+ years of experience designing, building, and maintaining scalable web applications.",
+    "Software engineer in Kathmandu. I write about building things, the films I watch, and the trails above the valley.",
 };
 
 export default function RootLayout({
@@ -27,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${fraunces.variable} font-sans antialiased bg-snow text-graphite`}
       >
         <ThemeProvider>{children}</ThemeProvider>
       </body>
