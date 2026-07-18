@@ -2,12 +2,22 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/posts";
 import { readingTime, formatDate } from "@/lib/reading-time";
+import { OG_IMAGE } from "@/lib/seo";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Blog | Yuhanna Kapali",
+  title: "Blog",
   description: "Notes on backend engineering, systems, and the things I build.",
+  alternates: { canonical: "/blog/" },
+  openGraph: {
+    title: "Blog | Yuhanna Kapali",
+    description:
+      "Notes on backend engineering, systems, and the things I build.",
+    url: "/blog/",
+    type: "website",
+    images: [OG_IMAGE],
+  },
 };
 
 export default function BlogIndexPage() {

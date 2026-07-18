@@ -1,12 +1,21 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllTreks } from "@/lib/content";
+import { OG_IMAGE } from "@/lib/seo";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Treks | Yuhanna Kapali",
+  title: "Treks",
   description: "Field guides to trails in the Nepal Himalaya.",
+  alternates: { canonical: "/treks/" },
+  openGraph: {
+    title: "Treks | Yuhanna Kapali",
+    description: "Field guides to trails in the Nepal Himalaya.",
+    url: "/treks/",
+    type: "website",
+    images: [OG_IMAGE],
+  },
 };
 
 export default function TreksIndexPage() {
@@ -32,7 +41,9 @@ export default function TreksIndexPage() {
                 trek.region,
                 trek.days ? `${trek.days} days` : "",
                 trek.difficulty,
-                trek.max_altitude ? `${trek.max_altitude.toLocaleString("en-US")} m` : "",
+                trek.max_altitude
+                  ? `${trek.max_altitude.toLocaleString("en-US")} m`
+                  : "",
               ].filter(Boolean);
 
               return (

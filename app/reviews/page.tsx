@@ -2,13 +2,22 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllReviews } from "@/lib/content";
 import { formatDate } from "@/lib/reading-time";
+import { OG_IMAGE } from "@/lib/seo";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { StarRating } from "../components/StarRating";
 
 export const metadata: Metadata = {
-  title: "Film | Yuhanna Kapali",
+  title: "Film",
   description: "Films I have watched and what stayed with me.",
+  alternates: { canonical: "/reviews/" },
+  openGraph: {
+    title: "Film | Yuhanna Kapali",
+    description: "Films I have watched and what stayed with me.",
+    url: "/reviews/",
+    type: "website",
+    images: [OG_IMAGE],
+  },
 };
 
 export default function ReviewsIndexPage() {

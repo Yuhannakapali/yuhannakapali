@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/posts";
 import { getAllReviews, getAllTreks, getLatestAcrossAll } from "@/lib/content";
 import { formatDate } from "@/lib/reading-time";
@@ -11,6 +12,10 @@ import { StarRating } from "./components/StarRating";
 import { Skills } from "./components/Skills";
 import { Experience } from "./components/Experience";
 import { Reveal, Stagger, StaggerItem } from "./components/Reveal";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const FEED_LABELS: Record<string, string> = {
   blog: "Blog",

@@ -3,6 +3,15 @@ import type { Metadata } from "next";
 import { getAllReviews, getReviewBySlug } from "@/lib/content";
 import { Article } from "../../components/Article";
 import { StarRating } from "../../components/StarRating";
+import { JsonLd } from "../../components/JsonLd";
+import {
+  AUTHOR_NAME,
+  PERSON_SCHEMA,
+  SITE_NAME,
+  absoluteUrl,
+  assetUrl,
+  ogImages,
+} from "@/lib/seo";
 
 type ReviewPageProps = {
   params: Promise<{ slug: string }>;
@@ -19,17 +28,22 @@ export async function generateMetadata({
   const review = getReviewBySlug(slug);
 
   if (!review) {
-    return { title: "Review Not Found | Yuhanna Kapali" };
+    return { title: "Review Not Found" };
   }
 
   return {
-    title: `${review.title} | Yuhanna Kapali`,
+    title: review.title,
     description: review.description || undefined,
+    alternates: { canonical: `/reviews/${slug}/` },
     openGraph: {
       title: review.title,
       description: review.description || undefined,
       type: "article",
-      images: review.cover ? [{ url: review.cover }] : undefined,
+      url: absoluteUrl(`/reviews/${slug}`),
+      siteName: SITE_NAME,
+      publishedTime: review.date || undefined,
+      authors: [AUTHOR_NAME],
+      images: ogImages(review.cover),
     },
   };
 }
@@ -49,15 +63,49 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
     );
   }
 
+  const url = absoluteUrl(`/reviews/${slug}`);
   return (
-    <Article
-      title={review.title}
-      date={review.date}
-      content={review.content}
-      cover={review.cover}
-      backHref="/reviews"
-      backLabel="Back to all reviews"
-      meta={
+    <>
+      <JsonLd
+        data={{
+          "@type": "Review",
+          name: review.title,
+          reviewBody: review.description || undefined,
+          datePublished: review.date || undefined,
+          url,
+          image: review.cover ? assetUrl(review.cover) : undefined,
+          author: PERSON_SCHEMA,
+          itemReviewed: {
+            "@type": "Movie",
+            name: review.film,
+            ...(review.year ? { dateCreated: String(review.year) } : {}),
+          },
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: review.rating,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        }}
+      />
+      <JsonLd
+        data={{
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+            { "@type": "ListItem", position: 2, name: "Film", item: absoluteUrl("/reviews") },
+            { "@type": "ListItem", position: 3, name: review.title, item: url },
+          ],
+        }}
+      />
+      <Article
+        title={review.title}
+        date={review.date}
+        content={review.content}
+        cover={review.cover}
+        backHref="/reviews"
+        backLabel="Back to all reviews"
+        meta={
         <div className="flex flex-wrap items-center gap-3 text-[15px] text-surface-muted">
           <span className="text-surface-text">
             {review.film}
@@ -66,6 +114,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
           <StarRating rating={review.rating} />
         </div>
       }
-    />
+      />
+    </>
   );
 }

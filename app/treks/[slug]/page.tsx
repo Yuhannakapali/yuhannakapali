@@ -2,6 +2,15 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllTreks, getTrekBySlug } from "@/lib/content";
 import { Article } from "../../components/Article";
+import { JsonLd } from "../../components/JsonLd";
+import {
+  AUTHOR_NAME,
+  PERSON_SCHEMA,
+  SITE_NAME,
+  absoluteUrl,
+  assetUrl,
+  ogImages,
+} from "@/lib/seo";
 
 type TrekPageProps = {
   params: Promise<{ slug: string }>;
@@ -18,17 +27,22 @@ export async function generateMetadata({
   const trek = getTrekBySlug(slug);
 
   if (!trek) {
-    return { title: "Trek Not Found | Yuhanna Kapali" };
+    return { title: "Trek Not Found" };
   }
 
   return {
-    title: `${trek.title} | Yuhanna Kapali`,
+    title: trek.title,
     description: trek.description || undefined,
+    alternates: { canonical: `/treks/${slug}/` },
     openGraph: {
       title: trek.title,
       description: trek.description || undefined,
       type: "article",
-      images: trek.cover ? [{ url: trek.cover }] : undefined,
+      url: absoluteUrl(`/treks/${slug}`),
+      siteName: SITE_NAME,
+      publishedTime: trek.date || undefined,
+      authors: [AUTHOR_NAME],
+      images: ogImages(trek.cover),
     },
   };
 }
@@ -61,15 +75,46 @@ export default async function TrekPage({ params }: TrekPageProps) {
     },
   ].filter((s) => s.value);
 
+  const url = absoluteUrl(`/treks/${slug}`);
+  const keywords = [trek.region, trek.difficulty, "trek", "Nepal", "Himalaya"]
+    .filter(Boolean)
+    .join(", ");
+
   return (
-    <Article
-      title={trek.title}
-      date={trek.date}
-      content={trek.content}
-      cover={trek.cover}
-      backHref="/treks"
-      backLabel="Back to all guides"
-      meta={
+    <>
+      <JsonLd
+        data={{
+          "@type": "Article",
+          headline: trek.title,
+          description: trek.description || undefined,
+          datePublished: trek.date || undefined,
+          dateModified: trek.date || undefined,
+          image: trek.cover ? assetUrl(trek.cover) : undefined,
+          author: PERSON_SCHEMA,
+          publisher: PERSON_SCHEMA,
+          mainEntityOfPage: url,
+          url,
+          keywords,
+        }}
+      />
+      <JsonLd
+        data={{
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+            { "@type": "ListItem", position: 2, name: "Treks", item: absoluteUrl("/treks") },
+            { "@type": "ListItem", position: 3, name: trek.title, item: url },
+          ],
+        }}
+      />
+      <Article
+        title={trek.title}
+        date={trek.date}
+        content={trek.content}
+        cover={trek.cover}
+        backHref="/treks"
+        backLabel="Back to all guides"
+        meta={
         <dl className="flex flex-wrap items-stretch gap-x-5 gap-y-3 border-y border-line py-4">
           {stats.map((s, i) => (
             <div
@@ -84,6 +129,7 @@ export default async function TrekPage({ params }: TrekPageProps) {
           ))}
         </dl>
       }
-    />
+      />
+    </>
   );
 }

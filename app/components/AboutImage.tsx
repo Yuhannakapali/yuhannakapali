@@ -32,7 +32,6 @@ export function AboutImage({ src, alt }: { src: string; alt: string }) {
       ref={ref}
       className="aspect-[16/10] w-full overflow-hidden rounded-2xl"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <motion.img
         src={src}
         alt={alt}
