@@ -112,6 +112,8 @@ export default async function TrekPage({ params }: TrekPageProps) {
         date={trek.date}
         content={trek.content}
         cover={trek.cover}
+        coverWidth={trek.coverWidth}
+        coverHeight={trek.coverHeight}
         backHref="/treks"
         backLabel="Back to all guides"
         meta={

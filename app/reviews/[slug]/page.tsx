@@ -103,6 +103,8 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         date={review.date}
         content={review.content}
         cover={review.cover}
+        coverWidth={review.coverWidth}
+        coverHeight={review.coverHeight}
         backHref="/reviews"
         backLabel="Back to all reviews"
         meta={

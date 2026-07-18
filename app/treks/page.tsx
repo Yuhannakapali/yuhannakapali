@@ -66,7 +66,10 @@ export default function TreksIndexPage() {
                       <img
                         src={trek.cover}
                         alt=""
+                        width={100}
+                        height={100}
                         loading="lazy"
+                        decoding="async"
                         className="h-[100px] w-[100px] shrink-0 rounded-md object-cover"
                       />
                     ) : null}

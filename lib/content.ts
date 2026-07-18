@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { getAllPosts } from "./posts";
+import { getImageSize } from "./image-size";
 
 // Shared helpers for the two extra content types (reviews and treks) plus a
 // unified "latest across everything" feed. All filesystem + gray-matter, so it
@@ -52,6 +53,13 @@ function byDateDesc<T extends { date: string }>(items: T[]): T[] {
   return [...items].sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
+type CoverSize = { coverWidth: number | null; coverHeight: number | null };
+
+function coverSize(cover: string): CoverSize {
+  const size = cover ? getImageSize(cover) : null;
+  return { coverWidth: size?.width ?? null, coverHeight: size?.height ?? null };
+}
+
 export type Review = {
   slug: string;
   title: string;
@@ -62,7 +70,7 @@ export type Review = {
   description: string;
   cover: string;
   content: string;
-};
+} & CoverSize;
 
 export type Trek = {
   slug: string;
@@ -76,20 +84,24 @@ export type Trek = {
   description: string;
   cover: string;
   content: string;
-};
+} & CoverSize;
 
 export function getAllReviews(): Review[] {
-  const reviews = readMarkdownDir<Review>("reviews", (slug, data, content) => ({
-    slug,
-    title: toStr(data.title) || slug,
-    film: toStr(data.film),
-    year: toNumber(data.year),
-    rating: toNumber(data.rating) ?? 0,
-    date: toISO(data.date),
-    description: toStr(data.description),
-    cover: toStr(data.cover),
-    content,
-  }));
+  const reviews = readMarkdownDir<Review>("reviews", (slug, data, content) => {
+    const cover = toStr(data.cover);
+    return {
+      slug,
+      title: toStr(data.title) || slug,
+      film: toStr(data.film),
+      year: toNumber(data.year),
+      rating: toNumber(data.rating) ?? 0,
+      date: toISO(data.date),
+      description: toStr(data.description),
+      cover,
+      ...coverSize(cover),
+      content,
+    };
+  });
   return byDateDesc(reviews);
 }
 
@@ -98,19 +110,23 @@ export function getReviewBySlug(slug: string): Review | null {
 }
 
 export function getAllTreks(): Trek[] {
-  const treks = readMarkdownDir<Trek>("treks", (slug, data, content) => ({
-    slug,
-    title: toStr(data.title) || slug,
-    region: toStr(data.region),
-    days: toNumber(data.days),
-    difficulty: toStr(data.difficulty),
-    best_season: toStr(data.best_season),
-    max_altitude: toNumber(data.max_altitude),
-    date: toISO(data.date),
-    description: toStr(data.description),
-    cover: toStr(data.cover),
-    content,
-  }));
+  const treks = readMarkdownDir<Trek>("treks", (slug, data, content) => {
+    const cover = toStr(data.cover);
+    return {
+      slug,
+      title: toStr(data.title) || slug,
+      region: toStr(data.region),
+      days: toNumber(data.days),
+      difficulty: toStr(data.difficulty),
+      best_season: toStr(data.best_season),
+      max_altitude: toNumber(data.max_altitude),
+      date: toISO(data.date),
+      description: toStr(data.description),
+      cover,
+      ...coverSize(cover),
+      content,
+    };
+  });
   return byDateDesc(treks);
 }
 
